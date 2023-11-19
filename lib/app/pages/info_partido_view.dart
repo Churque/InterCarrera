@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
 import 'package:kdksdkskdxd/app/widgets/match_info.dart';
 
 class MyInfoPartidoPage extends StatefulWidget {
@@ -92,7 +91,7 @@ class TeamResults extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(0, 0, 128, 0),
-      width: 96,
+      width: 100,
       height: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,23 +137,27 @@ class TeamResults extends StatelessWidget {
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                  width: 85,
+                  width: double.infinity,
                   height: double.infinity,
                   child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
+                    children: List.generate(6, (index) {
+                      return Positioned(
+                        left: 16 *
+                            index
+                                .toDouble(), // Ajusta este valor para el espaciado horizontal
                         top: 0,
                         child: Container(
                           width: 21,
                           height: 21,
                           decoration: BoxDecoration(
-                            color: Color(0xffff0000),
+                            color: index % 2 == 0
+                                ? Color(0xffff0000)
+                                : Color(0xff00d92f),
                             borderRadius: BorderRadius.circular(10.5),
                           ),
                           child: Center(
                             child: Text(
-                              'P',
+                              index % 2 == 0 ? 'P' : 'G',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: 'Inter',
@@ -165,104 +168,8 @@ class TeamResults extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        left: 16,
-                        top: 0,
-                        child: Container(
-                          width: 21,
-                          height: 21,
-                          decoration: BoxDecoration(
-                            color: Color(0xff00d92f),
-                            borderRadius: BorderRadius.circular(10.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'G',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 9,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 32,
-                        top: 0,
-                        child: Container(
-                          width: 21,
-                          height: 21,
-                          decoration: BoxDecoration(
-                            color: Color(0xffff0000),
-                            borderRadius: BorderRadius.circular(10.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'P',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 9,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 48,
-                        top: 0,
-                        child: Container(
-                          width: 21,
-                          height: 21,
-                          decoration: BoxDecoration(
-                            color: Color(0xff00d92f),
-                            borderRadius: BorderRadius.circular(10.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'G',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 9,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 64,
-                        top: 0,
-                        child: Container(
-                          width: 21,
-                          height: 21,
-                          decoration: BoxDecoration(
-                            color: Color(0xffff0000),
-                            borderRadius: BorderRadius.circular(10.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'P',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 9,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    }),
                   ),
                 ),
                 Container(
