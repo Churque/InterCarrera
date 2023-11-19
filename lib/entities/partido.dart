@@ -4,7 +4,7 @@ class Partido {
   final Equipo local;
   final Equipo visita;
   final String cancha;
-  final DateTime hora;
+  final String hora;
 
   Partido({
     required this.local,

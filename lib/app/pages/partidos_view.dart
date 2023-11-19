@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
+import 'package:kdksdkskdxd/app/widgets/partido_info.dart';
+import 'package:kdksdkskdxd/entities/equipo.dart';
+import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
+import 'package:kdksdkskdxd/entities/jugador.dart';
+import 'package:kdksdkskdxd/entities/partido.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage();
@@ -62,44 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget buildDayTabs() {
-    return Container(
-      height: 37,
-      child: Row(
-        children: [
-          for (var i = 0; i < days.length; i++)
-            InkWell(
-              onTap: () {
-                _onDayTapped(i);
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width / 3,
-                padding: EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: i == _selectedIndexDay
-                          ? Colors.green
-                          : Colors.transparent,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    days[i],
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
   Widget buildPartidosSection() {
     return Column(
       children: [
@@ -136,126 +103,93 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-        CustomContainer(),
-        CustomContainer(),
-        CustomContainer(),
-        CustomContainer(),
-        CustomContainer(),
+        PartidoInfo(
+          partido: Partido(
+            local: Equipo(
+              posicion: 1,
+              nombreEquipo: 'VILAREAL CF',
+              imagenURL:
+                  'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
+              estadisticas: EquipoEstadisticas(
+                  pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+              jugadores: [], // Agrega jugadores
+            ),
+            visita: Equipo(
+              posicion: 2,
+              nombreEquipo: 'GIRONA FC',
+              imagenURL:
+                  'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
+              estadisticas: EquipoEstadisticas(
+                  pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+              jugadores: [],
+            ),
+            cancha: 'Cancha N°1',
+            hora: "13:00",
+          ),
+        ),
+        PartidoInfo(
+          partido: Partido(
+            local: Equipo(
+              posicion: 1,
+              nombreEquipo: 'VILAREAL CF',
+              imagenURL:
+                  'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
+              estadisticas: EquipoEstadisticas(
+                  pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+              jugadores: [], // Agrega jugadores
+            ),
+            visita: Equipo(
+              posicion: 2,
+              nombreEquipo: 'GIRONA FC',
+              imagenURL:
+                  'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
+              estadisticas: EquipoEstadisticas(
+                  pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+              jugadores: [], // Agrega jugadores
+            ),
+            cancha: 'Cancha N°1',
+            hora: "13:00", // Ajusta la hora
+          ),
+        ),
       ],
     );
   }
-}
 
-class CustomContainer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget buildDayTabs() {
     return Container(
-        padding: EdgeInsets.fromLTRB(35.5, 33, 35.5, 32),
-        width: double.infinity,
-        height: 139,
-        decoration: BoxDecoration(
-          border: Border.all(color: Color(0xffcccccc)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 69,
-              height: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(9.5, 0, 9.5, 10),
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
-                        ),
-                      ),
+      height: 37,
+      child: Row(
+        children: [
+          for (var i = 0; i < days.length; i++)
+            InkWell(
+              onTap: () {
+                _onDayTapped(i);
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width / 3,
+                padding: EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: i == _selectedIndexDay
+                          ? Colors.green
+                          : Colors.transparent,
+                      width: 2.0,
                     ),
                   ),
-                  Text(
-                    'VILAREAL CF',
+                ),
+                child: Center(
+                  child: Text(
+                    days[i],
                     style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff000000),
+                      fontSize: 14,
                     ),
                   ),
-                ],
+                ),
               ),
             ),
-            SizedBox(
-              width: 40.5,
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 2, 0, 3),
-              height: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    child: Text(
-                      '15:00',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xff000000),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'Cancha N°1',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xff015c1a),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: 40.5,
-            ),
-            Container(
-              width: 69,
-              height: 138,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(9.5, 0, 9.5, 10),
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'GIRONA FC',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff000000),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ));
+        ],
+      ),
+    );
   }
 }

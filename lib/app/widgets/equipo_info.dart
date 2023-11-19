@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/entities/equipo.dart';
 
 class EquipoInfoWidget extends StatelessWidget {
-  final int posicion;
-  final String nombreEquipo;
-  final String imagenURL;
-  final List<int> estadisticas;
+  final Equipo equipo;
 
-  EquipoInfoWidget({
-    required this.posicion,
-    required this.nombreEquipo,
-    required this.imagenURL,
-    required this.estadisticas,
-  });
+  EquipoInfoWidget({required this.equipo});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +26,7 @@ class EquipoInfoWidget extends StatelessWidget {
                     right: 11,
                   ),
                   child: Text(
-                    posicion.toString(),
+                    equipo.posicion.toString(),
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 16,
@@ -57,7 +50,7 @@ class EquipoInfoWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(7.5),
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(imagenURL),
+                            image: NetworkImage(equipo.imagenURL),
                           ),
                         ),
                       ),
@@ -66,7 +59,7 @@ class EquipoInfoWidget extends StatelessWidget {
                           left: 11,
                         ),
                         child: Text(
-                          nombreEquipo,
+                          equipo.nombreEquipo,
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 13,
@@ -87,10 +80,10 @@ class EquipoInfoWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                for (int stat in estadisticas)
+                for (dynamic stat in equipo.estadisticas.toList())
                   Container(
                     margin: EdgeInsets.only(
-                      right: 22,
+                      right: 20,
                     ),
                     child: Text(
                       stat.toString(),

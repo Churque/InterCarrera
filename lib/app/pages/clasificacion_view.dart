@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
 import 'package:kdksdkskdxd/app/widgets/equipo_info.dart';
+import 'package:kdksdkskdxd/entities/equipo.dart';
+import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 
 class MyWidget extends StatefulWidget {
   const MyWidget({super.key});
@@ -26,120 +28,51 @@ class _MyWidgetState extends State<MyWidget> {
           children: [
             GrupoInfoWidget(groupName: 'GRUPO A'),
             EquipoInfoWidget(
-              posicion: 1,
-              nombreEquipo: 'FC Barcelona',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
+              equipo: Equipo(
+                posicion: 1,
+                nombreEquipo: 'FC Barcelona',
+                imagenURL:
+                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
+                estadisticas: EquipoEstadisticas(
+                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+                jugadores: [],
+              ),
             ),
             EquipoInfoWidget(
-              posicion: 2,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
+              equipo: Equipo(
+                posicion: 1,
+                nombreEquipo: 'FC Barcelona',
+                imagenURL:
+                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
+                estadisticas: EquipoEstadisticas(
+                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+                jugadores: [],
+              ),
             ),
             EquipoInfoWidget(
-              posicion: 3,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
+              equipo: Equipo(
+                posicion: 1,
+                nombreEquipo: 'FC Barcelona',
+                imagenURL:
+                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
+                estadisticas: EquipoEstadisticas(
+                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+                jugadores: [],
+              ),
             ),
             EquipoInfoWidget(
-              posicion: 4,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
+              equipo: Equipo(
+                posicion: 1,
+                nombreEquipo: 'FC Barcelona',
+                imagenURL:
+                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
+                estadisticas: EquipoEstadisticas(
+                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+                jugadores: [],
+              ),
             ),
             GrupoInfoWidget(groupName: 'GRUPO B'),
-            EquipoInfoWidget(
-              posicion: 1,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            EquipoInfoWidget(
-              posicion: 2,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            EquipoInfoWidget(
-              posicion: 3,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            EquipoInfoWidget(
-              posicion: 4,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
             GrupoInfoWidget(groupName: 'GRUPO C'),
-            EquipoInfoWidget(
-              posicion: 1,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            EquipoInfoWidget(
-              posicion: 2,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            EquipoInfoWidget(
-              posicion: 3,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            EquipoInfoWidget(
-              posicion: 4,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            GrupoInfoWidget(groupName: 'GRUPO D'),
-            EquipoInfoWidget(
-              posicion: 1,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            EquipoInfoWidget(
-              posicion: 2,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            EquipoInfoWidget(
-              posicion: 3,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
-            EquipoInfoWidget(
-              posicion: 4,
-              nombreEquipo: 'Real Madrid',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-              estadisticas: [9, 3, 3, 0, 0, 6],
-            ),
           ],
         ),
       ),
