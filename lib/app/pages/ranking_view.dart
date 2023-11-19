@@ -163,7 +163,7 @@ class JugadorInfoWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'asdasdasd',
+                        'AAAAA',
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 8,
