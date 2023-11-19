@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
+import 'package:kdksdkskdxd/entities/equipo.dart';
+import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class MyRankingPage extends StatefulWidget {
@@ -32,7 +34,15 @@ class _MyRankingState extends State<MyRankingPage> {
 
   Jugador miJugador = Jugador(
       nombre: 'Lionel Messi',
-      equipo: 'Deportes Temuco',
+      equipo: Equipo(
+        posicion: 1,
+        nombreEquipo: 'FC asdasdasd',
+        imagenURL:
+            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
+        estadisticas: EquipoEstadisticas(
+            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+        jugadores: [],
+      ),
       goles: 8,
       numCamiseta: 10);
 
@@ -153,7 +163,7 @@ class JugadorInfoWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        jugador.equipo,
+                        'AAAAA',
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 8,
