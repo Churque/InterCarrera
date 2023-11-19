@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kdksdkskdxd/entities/jugador.dart';
+//import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class JugadorWidget extends StatelessWidget {
   final String nombre;
