@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/app/widgets/JugadorWidget.dart';
+import 'package:kdksdkskdxd/app/widgets/NavBarJugadoresEquipo.dart';
 import 'package:kdksdkskdxd/app/widgets/match_info.dart';
+import 'package:kdksdkskdxd/entities/equipo.dart';
+import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
+import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class MyInfoPartidoPage extends StatefulWidget {
   const MyInfoPartidoPage();
@@ -9,6 +14,22 @@ class MyInfoPartidoPage extends StatefulWidget {
 }
 
 class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
+  Jugador miJugador = Jugador(
+      nombre: 'Lionel Messi',
+      // imagenURL:
+      //    'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
+      equipo: Equipo(
+        posicion: 1,
+        nombreEquipo: 'FC Barcelona',
+        imagenURL:
+            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
+        estadisticas: EquipoEstadisticas(
+            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+        jugadores: [],
+      ),
+      goles: 8,
+      numCamiseta: 13);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,76 +46,93 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
             _buildMatchInfoRow(),
             _buildRecentResults(),
             tituloJugadores(),
-            tituloJugadoresEquipo(),
-            Container(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(29.5, 6.5, 29.5, 6.5),
-                    width: double.infinity,
-                    height: 55,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xffd9d9d9)),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          height: double.infinity,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                width: 42,
-                                height: 42,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(21),
-                                  color: Color(0xffd9d9d9),
-                                ),
-                              ),
-                              Text(
-                                'Ciro inmobile',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.5,
-                                  color: Color(0xff000000),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0, 1, 0, 0),
-                          child: Text(
-                            '17',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w900,
-                              height: 1.2125,
-                              color: Color(0xff000000),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 3,
-                  ),
-                ],
-              ),
-            )
+            NavBarJugadoresEquipo(),
+            JugadorWidget(
+              nombre: 'Lionel messi',
+              imagenURL:
+                  'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
+              numCamiseta: 10,
+            ),
+            containerJugador(),
+            containerJugador(),
+            containerJugador(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget containerJugador() {
+    return Container(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(30, 6.5, 29.5, 6.5),
+            width: double.infinity,
+            height: 55,
+            decoration: BoxDecoration(
+              border: Border.all(color: Color(0xffd9d9d9)),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: double.infinity,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 0, 15, 0),
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          shape: BoxShape
+                              .circle, // Cambiado a BoxShape.circle para hacer un círculo
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44'), // Reemplaza con la URL de tu imagen
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'Ciro inmobile',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          height: 1.5,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Spacer(), // Agregado Spacer para empujar el número "17" a la derecha
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 1, 0, 0),
+                  child: Text(
+                    '17',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                      height: 1.2125,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -108,70 +146,90 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              height: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xffd9d9d9)),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    width: 27,
-                    height: 27,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13.5),
-                      color: Color(0xffd9d9d9),
+            child: GestureDetector(
+              onTap: () {
+                // Lógica para manejar el clic en Villareal CF
+                print('Clic en Villareal CF');
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Color(0xffd9d9d9)),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(right: 10),
+                      width: 27,
+                      height: 27,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png'),
+                        ),
+                      ),
                     ),
-                  ),
-                  Text(
-                    'VILLAREAL CF',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      height: 1.5,
-                      color: Color(0xff000000),
+                    Text(
+                      'VILLAREAL CF',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        height: 1.5,
+                        color: Color(0xff000000),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              height: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xffd9d9d9)),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'GIRONA FC',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      height: 1.5,
-                      color: Color(0xff000000),
+            child: GestureDetector(
+              onTap: () {
+                // Lógica para manejar el clic en Girona FC
+                print('Clic en Girona FC');
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Color(0xffd9d9d9)),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'GIRONA FC',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        height: 1.5,
+                        color: Color(0xff000000),
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 10),
-                    width: 27,
-                    height: 27,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13.5),
-                      color: Color(0xffd9d9d9),
+                    Container(
+                      margin: EdgeInsets.only(left: 10),
+                      width: 27,
+                      height: 27,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png'),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
