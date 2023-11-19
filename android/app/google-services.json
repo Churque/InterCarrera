@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "212728282979",
+    "project_id": "intercarrera-c35b0",
+    "storage_bucket": "intercarrera-c35b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212728282979:android:edd2a5dbb129139358dd56",
+        "android_client_info": {
+          "package_name": "com.example.kdksdkskdxd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_2oR-yldU1xfsuifXovu3_47Wwm49cPA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
