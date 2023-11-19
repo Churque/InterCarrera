@@ -24,7 +24,181 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
           children: [
             _buildMatchInfoRow(),
             _buildRecentResults(),
+            tituloJugadores(),
+            tituloJugadoresEquipo(),
+            Container(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(29.5, 6.5, 29.5, 6.5),
+                    width: double.infinity,
+                    height: 55,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Color(0xffd9d9d9)),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          height: double.infinity,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(21),
+                                  color: Color(0xffd9d9d9),
+                                ),
+                              ),
+                              Text(
+                                'Ciro inmobile',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.5,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 1, 0, 0),
+                          child: Text(
+                            '17',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                              height: 1.2125,
+                              color: Color(0xff000000),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                ],
+              ),
+            )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget tituloJugadoresEquipo() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+      width: double.infinity,
+      height: 53,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              height: double.infinity,
+              decoration: BoxDecoration(
+                border: Border.all(color: Color(0xffd9d9d9)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    width: 27,
+                    height: 27,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13.5),
+                      color: Color(0xffd9d9d9),
+                    ),
+                  ),
+                  Text(
+                    'VILLAREAL CF',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      height: 1.5,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              height: double.infinity,
+              decoration: BoxDecoration(
+                border: Border.all(color: Color(0xffd9d9d9)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'GIRONA FC',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      height: 1.5,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10),
+                    width: 27,
+                    height: 27,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13.5),
+                      color: Color(0xffd9d9d9),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget tituloJugadores() {
+    return Container(
+      width: double.infinity,
+      height: 54,
+      decoration: BoxDecoration(
+        border: Border.all(color: Color(0xffd9d9d9)),
+        color: Color(0xffffffff),
+      ),
+      child: Center(
+        child: Text(
+          'Jugadores',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 16,
+            fontWeight: FontWeight.w900,
+            height: 1.2125,
+            color: Color(0xff000000),
+          ),
         ),
       ),
     );
@@ -90,8 +264,8 @@ class TeamResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 0, 128, 0),
-      width: 100,
+      margin: EdgeInsets.fromLTRB(10, 0, 128, 0),
+      width: 110,
       height: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,10 +311,10 @@ class TeamResults extends StatelessWidget {
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                  width: double.infinity,
+                  width: 85,
                   height: double.infinity,
                   child: Stack(
-                    children: List.generate(6, (index) {
+                    children: List.generate(5, (index) {
                       return Positioned(
                         left: 16 *
                             index
@@ -195,7 +369,7 @@ class TeamResultsRight extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // frame80abq (117:375)
-      width: 96,
+      width: 100,
       height: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -237,7 +411,6 @@ class TeamResultsRight extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  // arrowszF (117:439)
                   margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
                   width: 6,
                   height: 8,
@@ -251,20 +424,24 @@ class TeamResultsRight extends StatelessWidget {
                   width: 85,
                   height: double.infinity,
                   child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
+                    children: List.generate(5, (index) {
+                      return Positioned(
+                        left: 16 *
+                            index
+                                .toDouble(), // Ajusta este valor para el espaciado horizontal
                         top: 0,
                         child: Container(
                           width: 21,
                           height: 21,
                           decoration: BoxDecoration(
-                            color: Color(0xffff0000),
+                            color: index % 2 == 0
+                                ? Color(0xffff0000)
+                                : Color(0xff00d92f),
                             borderRadius: BorderRadius.circular(10.5),
                           ),
                           child: Center(
                             child: Text(
-                              'P',
+                              index % 2 == 0 ? 'P' : 'G',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: 'Inter',
@@ -275,104 +452,8 @@ class TeamResultsRight extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        left: 16,
-                        top: 0,
-                        child: Container(
-                          width: 21,
-                          height: 21,
-                          decoration: BoxDecoration(
-                            color: Color(0xff00d92f),
-                            borderRadius: BorderRadius.circular(10.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'G',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 9,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 32,
-                        top: 0,
-                        child: Container(
-                          width: 21,
-                          height: 21,
-                          decoration: BoxDecoration(
-                            color: Color(0xffff0000),
-                            borderRadius: BorderRadius.circular(10.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'P',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 9,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 48,
-                        top: 0,
-                        child: Container(
-                          width: 21,
-                          height: 21,
-                          decoration: BoxDecoration(
-                            color: Color(0xff00d92f),
-                            borderRadius: BorderRadius.circular(10.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'G',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 9,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 64,
-                        top: 0,
-                        child: Container(
-                          width: 21,
-                          height: 21,
-                          decoration: BoxDecoration(
-                            color: Color(0xffff0000),
-                            borderRadius: BorderRadius.circular(10.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'P',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 9,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    }),
                   ),
                 ),
               ],
