@@ -35,7 +35,6 @@ class _MyRankingState extends State<MyRankingPage> {
   Jugador miJugador = Jugador(
       nombre: 'Lionel Messi',
       equipo: Equipo(
-        posicion: 1,
         nombreEquipo: 'FC asdasdasd',
         imagenURL:
             'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',

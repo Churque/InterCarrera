@@ -29,7 +29,6 @@ class _MyWidgetState extends State<MyWidget> {
             GrupoInfoWidget(groupName: 'GRUPO A'),
             EquipoInfoWidget(
               equipo: Equipo(
-                posicion: 1,
                 nombreEquipo: 'FC Barcelona',
                 imagenURL:
                     'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
@@ -40,7 +39,6 @@ class _MyWidgetState extends State<MyWidget> {
             ),
             EquipoInfoWidget(
               equipo: Equipo(
-                posicion: 1,
                 nombreEquipo: 'FC Barcelona',
                 imagenURL:
                     'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
@@ -51,7 +49,6 @@ class _MyWidgetState extends State<MyWidget> {
             ),
             EquipoInfoWidget(
               equipo: Equipo(
-                posicion: 1,
                 nombreEquipo: 'FC Barcelona',
                 imagenURL:
                     'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
@@ -62,7 +59,6 @@ class _MyWidgetState extends State<MyWidget> {
             ),
             EquipoInfoWidget(
               equipo: Equipo(
-                posicion: 1,
                 nombreEquipo: 'FC Barcelona',
                 imagenURL:
                     'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',

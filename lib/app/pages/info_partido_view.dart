@@ -19,7 +19,6 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
       // imagenURL:
       //    'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
       equipo: Equipo(
-        posicion: 1,
         nombreEquipo: 'FC Barcelona',
         imagenURL:
             'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',

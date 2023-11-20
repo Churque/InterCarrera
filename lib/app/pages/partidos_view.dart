@@ -25,18 +25,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndexPage = index;
       if (index == 0) {
+        // Navegar a la pantalla de inicio
         Navigator.pushNamed(context, '/');
       }
       if (index == 1) {
-        // Si se hace clic en "Clasificación", navega a la página de clasificación
+        // Navegar a la página de clasificación
         Navigator.pushNamed(context, '/clasificacion');
       }
       if (index == 2) {
-        Navigator.pushNamed(context, '/favoritos');
-      }
-      if (index == 3) {
+        // Navegar a la página de ranking
         Navigator.pushNamed(context, '/ranking');
       }
     });
@@ -50,6 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
           "InterCarrera",
           style: TextStyle(fontSize: 16, color: Colors.white),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              // Navegar a la pantalla de añadir equipo
+              Navigator.pushNamed(context, '/add');
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -105,7 +112,6 @@ class _MyHomePageState extends State<MyHomePage> {
         PartidoInfo(
           partido: Partido(
             local: Equipo(
-              posicion: 1,
               nombreEquipo: 'VILAREAL CF',
               imagenURL:
                   'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
@@ -114,7 +120,6 @@ class _MyHomePageState extends State<MyHomePage> {
               jugadores: [], // Agrega jugadores
             ),
             visita: Equipo(
-              posicion: 2,
               nombreEquipo: 'GIRONA FC',
               imagenURL:
                   'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
@@ -129,7 +134,6 @@ class _MyHomePageState extends State<MyHomePage> {
         PartidoInfo(
           partido: Partido(
             local: Equipo(
-              posicion: 1,
               nombreEquipo: 'VILAREAL CF',
               imagenURL:
                   'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
@@ -138,7 +142,6 @@ class _MyHomePageState extends State<MyHomePage> {
               jugadores: [], // Agrega jugadores
             ),
             visita: Equipo(
-              posicion: 2,
               nombreEquipo: 'GIRONA FC',
               imagenURL:
                   'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
