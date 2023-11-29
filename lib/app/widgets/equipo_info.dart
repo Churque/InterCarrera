@@ -14,7 +14,6 @@ class EquipoInfoWidget extends StatelessWidget {
         color: Color(0xffffffff),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
@@ -77,8 +76,6 @@ class EquipoInfoWidget extends StatelessWidget {
           ),
           Container(
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 for (dynamic stat in equipo.estadisticas.toList())
                   Container(

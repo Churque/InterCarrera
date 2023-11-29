@@ -19,7 +19,7 @@ class JugadorWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(30, 6.5, 29.5, 6.5),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             width: double.infinity,
             height: 55,
             decoration: BoxDecoration(
@@ -34,7 +34,6 @@ class JugadorWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 15, 0),
                         width: 42,
                         height: 42,
                         decoration: BoxDecoration(
@@ -48,7 +47,7 @@ class JugadorWidget extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 25,
                       ),
                       Text(
                         nombre,
@@ -66,7 +65,6 @@ class JugadorWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 1, 0, 0),
                   child: Text(
                     numCamiseta.toString(),
                     textAlign: TextAlign.left,
@@ -74,7 +72,6 @@ class JugadorWidget extends StatelessWidget {
                       fontFamily: 'Poppins',
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
-                      height: 1.2125,
                       color: Color(0xff000000),
                     ),
                   ),

@@ -53,9 +53,24 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
                   'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
               numCamiseta: 10,
             ),
-            containerJugador(),
-            containerJugador(),
-            containerJugador(),
+            JugadorWidget(
+              nombre: 'Lionel messi',
+              imagenURL:
+                  'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
+              numCamiseta: 10,
+            ),
+            JugadorWidget(
+              nombre: 'Lionel messi',
+              imagenURL:
+                  'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
+              numCamiseta: 10,
+            ),
+            JugadorWidget(
+              nombre: 'Lionel messi',
+              imagenURL:
+                  'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
+              numCamiseta: 10,
+            ),
           ],
         ),
       ),
@@ -264,33 +279,29 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
 
   Widget _buildMatchInfoRow() {
     return Container(
+      height: 171,
       padding: EdgeInsets.all(15),
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(color: Color(0xffcccccc)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MatchInfoRow(),
-        ],
-      ),
+      child: MatchInfoRow(),
     );
   }
 
   Widget _buildRecentResults() {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 24, 20, 34),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      //padding: EdgeInsets.fromLTRB(20, 24, 20, 34),
+      height: 171,
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(color: Color(0xffcccccc)),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 50),
             child: Text(
               'Resultados Recientes',
               style: TextStyle(
@@ -303,11 +314,13 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
           ),
           Container(
             width: double.infinity,
-            height: 60,
+            height: 90,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TeamResults(),
+                SizedBox(width: 155),
                 TeamResultsRight(),
               ],
             ),
@@ -322,20 +335,18 @@ class TeamResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(10, 0, 128, 0),
       width: 110,
-      height: double.infinity,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 34, 10),
+            margin: EdgeInsets.only(bottom: 10),
             width: double.infinity,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 1, 10, 0),
+                  margin: EdgeInsets.only(right: 10),
                   child: Text(
                     'Vil',
                     style: TextStyle(
@@ -362,22 +373,18 @@ class TeamResults extends StatelessWidget {
             ),
           ),
           Container(
-            width: double.infinity,
             height: 21,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                  margin: EdgeInsets.only(right: 5),
                   width: 85,
-                  height: double.infinity,
                   child: Stack(
                     children: List.generate(5, (index) {
                       return Positioned(
                         left: 16 *
                             index
                                 .toDouble(), // Ajusta este valor para el espaciado horizontal
-                        top: 0,
                         child: Container(
                           width: 21,
                           height: 21,
@@ -426,20 +433,18 @@ class TeamResultsRight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // frame80abq (117:375)
       width: 100,
-      height: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(32, 0, 0, 10),
+            margin: EdgeInsets.fromLTRB(36, 0, 0, 10),
             width: double.infinity,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 1, 10, 0),
+                  margin: EdgeInsets.fromLTRB(0, 5, 10, 0),
                   child: Text(
                     'Gir',
                     style: TextStyle(
@@ -463,13 +468,11 @@ class TeamResultsRight extends StatelessWidget {
             ),
           ),
           Container(
-            width: double.infinity,
             height: 21,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                  margin: EdgeInsets.only(right: 5),
                   width: 6,
                   height: 8,
                   child: Image.network(

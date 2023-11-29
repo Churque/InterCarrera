@@ -110,7 +110,7 @@ class GrupoInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(32.5, 8.5, 12.5, 8.5),
+      padding: EdgeInsets.only(right: 30),
       width: double.infinity,
       height: 37,
       decoration: BoxDecoration(
@@ -118,12 +118,12 @@ class GrupoInfoWidget extends StatelessWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
             margin: EdgeInsets.fromLTRB(0, 0, 101, 0),
             child: Text(
               groupName,
-              textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 13,
@@ -134,15 +134,9 @@ class GrupoInfoWidget extends StatelessWidget {
             ),
           ),
           Container(
-            height: double.infinity,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(
-                    left: 15,
-                  ),
                   child: Text(
                     'PTS',
                     style: TextStyle(
@@ -194,7 +188,7 @@ class GrupoInfoWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 14),
                 Container(
                   margin: EdgeInsets.only(
                     right: 0,

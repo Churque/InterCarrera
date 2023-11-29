@@ -62,17 +62,17 @@ class _MyRankingState extends State<MyRankingPage> {
             JugadorInfoWidget(jugador: miJugador),
             JugadorInfoWidget(jugador: miJugador),
             JugadorInfoWidget(jugador: miJugador),
-            VerTodosWidget(),
+            buildBotonVerTodos(),
             GrupoInfoWidget(tipoRank: 'Asistencias'),
             JugadorInfoWidget(jugador: miJugador),
             JugadorInfoWidget(jugador: miJugador),
             JugadorInfoWidget(jugador: miJugador),
-            VerTodosWidget(),
+            buildBotonVerTodos(),
             GrupoInfoWidget(tipoRank: 'Goleadores + Asistencias'),
             JugadorInfoWidget(jugador: miJugador),
             JugadorInfoWidget(jugador: miJugador),
             JugadorInfoWidget(jugador: miJugador),
-            VerTodosWidget(),
+            buildBotonVerTodos(),
           ],
         ),
       ),
@@ -84,30 +84,25 @@ class _MyRankingState extends State<MyRankingPage> {
   }
 }
 
-class VerTodosWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        // Acción a realizar al hacer clic en "Ver todos"
-        // Puedes definir una función para manejar la acción que desees aquí
-      },
-      child: Container(
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+Widget buildBotonVerTodos() {
+  return InkWell(
+    onTap: () {},
+    child: Container(
+      height: 40,
+      child: Align(
+        alignment: Alignment.center,
         child: Text(
           'Ver todos',
           style: TextStyle(
             fontFamily: 'Poppins',
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            height: 1.5,
             color: Color(0xff000000),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }
 
 class JugadorInfoWidget extends StatelessWidget {
@@ -118,83 +113,69 @@ class JugadorInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.fromLTRB(21, 14.5, 21, 14.5),
-            width: double.infinity,
-            height: 65,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Color(0xffcccccc),
+        height: 65,
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Color(0xffcccccc),
+            ),
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              width: 25,
+              height: 25,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Color(0xffd9d9d9),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                height: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      jugador.nombre,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff000000),
+                      ),
+                    ),
+                    Text(
+                      'asdasdasd',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 8,
+                        fontWeight: FontWeight.w400,
+                        height: 1.5,
+                        color: Color(0xff000000),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Color(0xffd9d9d9),
-                  ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                jugador.goles.toString(),
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xff000000),
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  height: double.infinity,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        jugador.nombre,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          height: 1.5,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                      Text(
-                        'asdasdasd',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 8,
-                          fontWeight: FontWeight.w400,
-                          height: 1.5,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 175),
-                  height: double.infinity,
-                  child: Text(
-                    jugador.goles.toString(),
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5,
-                      color: Color(0xff000000),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }
 

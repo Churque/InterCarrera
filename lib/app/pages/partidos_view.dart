@@ -102,53 +102,57 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-        PartidoInfo(
-          partido: Partido(
-            local: Equipo(
-              posicion: 1,
-              nombreEquipo: 'VILAREAL CF',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
-              estadisticas: EquipoEstadisticas(
-                  pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-              jugadores: [], // Agrega jugadores
+        Column(
+          children: [
+            PartidoInfo(
+              partido: Partido(
+                local: Equipo(
+                  posicion: 1,
+                  nombreEquipo: 'VILAREAL CF',
+                  imagenURL:
+                      'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
+                  estadisticas: EquipoEstadisticas(
+                      pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+                  jugadores: [], // Agrega jugadores
+                ),
+                visita: Equipo(
+                  posicion: 2,
+                  nombreEquipo: 'GIRONA FC',
+                  imagenURL:
+                      'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
+                  estadisticas: EquipoEstadisticas(
+                      pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+                  jugadores: [],
+                ),
+                cancha: 'Cancha N°1',
+                hora: "13:00",
+              ),
             ),
-            visita: Equipo(
-              posicion: 2,
-              nombreEquipo: 'GIRONA FC',
-              imagenURL:
-                  'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
-              estadisticas: EquipoEstadisticas(
-                  pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-              jugadores: [],
+            PartidoInfo(
+              partido: Partido(
+                local: Equipo(
+                  posicion: 1,
+                  nombreEquipo: 'VILAREAL CF',
+                  imagenURL:
+                      'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
+                  estadisticas: EquipoEstadisticas(
+                      pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+                  jugadores: [], // Agrega jugadores
+                ),
+                visita: Equipo(
+                  posicion: 2,
+                  nombreEquipo: 'GIRONA FC',
+                  imagenURL:
+                      'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
+                  estadisticas: EquipoEstadisticas(
+                      pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
+                  jugadores: [], // Agrega jugadores
+                ),
+                cancha: 'Cancha N°1',
+                hora: "13:00", // Ajusta la hora
+              ),
             ),
-            cancha: 'Cancha N°1',
-            hora: "13:00",
-          ),
-        ),
-        PartidoInfo(
-          partido: Partido(
-            local: Equipo(
-              posicion: 1,
-              nombreEquipo: 'VILAREAL CF',
-              imagenURL:
-                  'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
-              estadisticas: EquipoEstadisticas(
-                  pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-              jugadores: [], // Agrega jugadores
-            ),
-            visita: Equipo(
-              posicion: 2,
-              nombreEquipo: 'GIRONA FC',
-              imagenURL:
-                  'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
-              estadisticas: EquipoEstadisticas(
-                  pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-              jugadores: [], // Agrega jugadores
-            ),
-            cancha: 'Cancha N°1',
-            hora: "13:00", // Ajusta la hora
-          ),
+          ],
         ),
       ],
     );
@@ -166,7 +170,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Container(
                 width: MediaQuery.of(context).size.width / 3,
-                padding: EdgeInsets.symmetric(vertical: 8),
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
