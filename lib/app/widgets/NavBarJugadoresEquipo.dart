@@ -12,13 +12,11 @@ class _NavBarJugadoresEquipo extends State<NavBarJugadoresEquipo> {
     setState(() {
       _selectedIndex = index;
     });
-    // Puedes agregar lógica adicional aquí si es necesario
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
       width: double.infinity,
       height: 53,
       child: Row(
@@ -28,7 +26,7 @@ class _NavBarJugadoresEquipo extends State<NavBarJugadoresEquipo> {
             child: InkWell(
               onTap: () {
                 _onContainerTapped(0);
-                // Lógica para manejar el clic en Villareal CF
+
                 print('Clic en Villareal CF');
               },
               child: Ink(

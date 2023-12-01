@@ -5,7 +5,6 @@ class MatchInfoRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _MatchInfoCard(
           image:
@@ -35,9 +34,7 @@ class _MatchInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
@@ -53,7 +50,7 @@ class _MatchInfoCard extends StatelessWidget {
           Text(
             teamName,
             style: TextStyle(
-              fontFamily: 'Inter',
+              fontFamily: 'Poppins',
               fontSize: 12,
               fontWeight: FontWeight.w400,
               color: Color(0xff000000),
@@ -74,24 +71,20 @@ class _MatchTimeAndLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            child: Text(
-              time,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: Color(0xff000000),
-              ),
+          Text(
+            time,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: Color(0xff000000),
             ),
           ),
+          SizedBox(height: 10),
           Text(
             location,
             style: TextStyle(

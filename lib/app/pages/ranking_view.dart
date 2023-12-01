@@ -5,7 +5,8 @@ import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class MyRankingPage extends StatefulWidget {
-  const MyRankingPage();
+  //const MyRankingPage();
+  const MyRankingPage({Key? key}) : super(key: key);
 
   @override
   _MyRankingState createState() => _MyRankingState();
@@ -32,20 +33,6 @@ class _MyRankingState extends State<MyRankingPage> {
     });
   }
 
-  Jugador miJugador = Jugador(
-      nombre: 'Lionel Messi',
-      equipo: Equipo(
-        posicion: 1,
-        nombreEquipo: 'FC asdasdasd',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-        jugadores: [],
-      ),
-      goles: 8,
-      numCamiseta: 10);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,138 +45,131 @@ class _MyRankingState extends State<MyRankingPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Dentro de tu widget principal
             GrupoInfoWidget(tipoRank: 'Goleadores'),
-            JugadorInfoWidget(jugador: miJugador),
-            JugadorInfoWidget(jugador: miJugador),
-            JugadorInfoWidget(jugador: miJugador),
-            VerTodosWidget(),
+            for (var jugador in topGoleadores)
+              JugadorInfoWidget(
+                  jugador: jugador, puntuacion: jugador.goles.toString()),
+            buildBotonVerTodos(),
             GrupoInfoWidget(tipoRank: 'Asistencias'),
-            JugadorInfoWidget(jugador: miJugador),
-            JugadorInfoWidget(jugador: miJugador),
-            JugadorInfoWidget(jugador: miJugador),
-            VerTodosWidget(),
+            for (var jugador in topAsistidores)
+              JugadorInfoWidget(
+                  jugador: jugador, puntuacion: jugador.asistencias.toString()),
+            buildBotonVerTodos(),
+
             GrupoInfoWidget(tipoRank: 'Goleadores + Asistencias'),
-            JugadorInfoWidget(jugador: miJugador),
-            JugadorInfoWidget(jugador: miJugador),
-            JugadorInfoWidget(jugador: miJugador),
-            VerTodosWidget(),
+            for (var jugador in topGoleadoresYAsistidores)
+              JugadorInfoWidget(
+                  jugador: jugador,
+                  puntuacion: (jugador.goles + jugador.asistencias).toString()),
+            buildBotonVerTodos(),
           ],
         ),
       ),
+      /*
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: _selectedIndexPage,
         onItemTapped: _onItemTapped,
       ),
+      */
     );
   }
 }
 
-class VerTodosWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        // Acción a realizar al hacer clic en "Ver todos"
-        // Puedes definir una función para manejar la acción que desees aquí
-      },
-      child: Container(
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+Widget buildBotonVerTodos() {
+  return InkWell(
+    onTap: () {},
+    child: Container(
+      height: 40,
+      child: Align(
+        alignment: Alignment.center,
         child: Text(
           'Ver todos',
           style: TextStyle(
             fontFamily: 'Poppins',
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            height: 1.5,
             color: Color(0xff000000),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }
 
 class JugadorInfoWidget extends StatelessWidget {
   final Jugador jugador;
+  final String puntuacion;
 
-  JugadorInfoWidget({required this.jugador});
+  JugadorInfoWidget({required this.jugador, required this.puntuacion});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      height: 65,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Color(0xffcccccc),
+          ),
+        ),
+      ),
+      child: Row(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(21, 14.5, 21, 14.5),
-            width: double.infinity,
-            height: 65,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Color(0xffcccccc),
-                ),
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            width: 25,
+            height: 25,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network(
+                jugador.imagenURL,
+                width: 25,
+                height: 25,
+                fit: BoxFit.cover,
               ),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Color(0xffd9d9d9),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  height: double.infinity,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        jugador.nombre,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          height: 1.5,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                      Text(
-                        'AAAAA',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 8,
-                          fontWeight: FontWeight.w400,
-                          height: 1.5,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 175),
-                  height: double.infinity,
-                  child: Text(
-                    jugador.goles.toString(),
+          ),
+          Expanded(
+            child: Container(
+              height: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    jugador.nombre,
                     style: TextStyle(
                       fontFamily: 'Poppins',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                  Text(
+                    jugador.equipo.nombreEquipo,
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 8,
+                      fontWeight: FontWeight.w400,
                       height: 1.5,
                       color: Color(0xff000000),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              puntuacion,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Color(0xff000000),
+              ),
             ),
           ),
         ],

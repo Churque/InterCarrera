@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/app/pages/main_screen.dart';
 import 'package:kdksdkskdxd/app/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -21,8 +22,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
       ),
-      initialRoute: '/',
-      routes: routes,
+      home: const MainScreen(),
+      //initialRoute: '/',
+      //routes: routes,
     );
   }
 }

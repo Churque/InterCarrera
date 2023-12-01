@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
 import 'package:kdksdkskdxd/app/widgets/equipo_info.dart';
-import 'package:kdksdkskdxd/entities/equipo.dart';
-import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
+import 'package:kdksdkskdxd/entities/grupo.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class MyClasificationPage extends StatefulWidget {
+  //const MyClasificationPage({super.key});
+  const MyClasificationPage({Key? key}) : super(key: key);
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<MyClasificationPage> createState() => _MyClasificationPage();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _MyClasificationPage extends State<MyClasificationPage> {
   int _selectedIndexPage = 1;
 
   @override
@@ -26,60 +25,20 @@ class _MyWidgetState extends State<MyWidget> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            GrupoInfoWidget(groupName: 'GRUPO A'),
-            EquipoInfoWidget(
-              equipo: Equipo(
-                posicion: 1,
-                nombreEquipo: 'FC Barcelona',
-                imagenURL:
-                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-                estadisticas: EquipoEstadisticas(
-                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                jugadores: [],
-              ),
-            ),
-            EquipoInfoWidget(
-              equipo: Equipo(
-                posicion: 1,
-                nombreEquipo: 'FC Barcelona',
-                imagenURL:
-                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-                estadisticas: EquipoEstadisticas(
-                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                jugadores: [],
-              ),
-            ),
-            EquipoInfoWidget(
-              equipo: Equipo(
-                posicion: 1,
-                nombreEquipo: 'FC Barcelona',
-                imagenURL:
-                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-                estadisticas: EquipoEstadisticas(
-                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                jugadores: [],
-              ),
-            ),
-            EquipoInfoWidget(
-              equipo: Equipo(
-                posicion: 1,
-                nombreEquipo: 'FC Barcelona',
-                imagenURL:
-                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-                estadisticas: EquipoEstadisticas(
-                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                jugadores: [],
-              ),
-            ),
-            GrupoInfoWidget(groupName: 'GRUPO B'),
-            GrupoInfoWidget(groupName: 'GRUPO C'),
+            Column(
+              children: [
+                for (var grupo in tusGrupos) GrupoWidget(grupo: grupo),
+              ],
+            )
           ],
         ),
       ),
+      /*
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: _selectedIndexPage,
         onItemTapped: _onItemTapped,
       ),
+      */
     );
   }
 
@@ -102,6 +61,22 @@ class _MyWidgetState extends State<MyWidget> {
   }
 }
 
+class GrupoWidget extends StatelessWidget {
+  final Grupo grupo;
+
+  const GrupoWidget({required this.grupo});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        GrupoInfoWidget(groupName: grupo.nombre),
+        for (var equipo in grupo.equipos) EquipoInfoWidget(equipo: equipo),
+      ],
+    );
+  }
+}
+
 class GrupoInfoWidget extends StatelessWidget {
   final String groupName;
 
@@ -110,7 +85,7 @@ class GrupoInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(32.5, 8.5, 12.5, 8.5),
+      padding: EdgeInsets.only(right: 30),
       width: double.infinity,
       height: 37,
       decoration: BoxDecoration(
@@ -118,12 +93,12 @@ class GrupoInfoWidget extends StatelessWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
             margin: EdgeInsets.fromLTRB(0, 0, 101, 0),
             child: Text(
               groupName,
-              textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 13,
@@ -134,15 +109,9 @@ class GrupoInfoWidget extends StatelessWidget {
             ),
           ),
           Container(
-            height: double.infinity,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(
-                    left: 15,
-                  ),
                   child: Text(
                     'PTS',
                     style: TextStyle(
@@ -194,7 +163,7 @@ class GrupoInfoWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 14),
                 Container(
                   margin: EdgeInsets.only(
                     right: 0,

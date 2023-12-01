@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
 
 class PartidoInfo extends StatelessWidget {
@@ -9,7 +10,6 @@ class PartidoInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(35.5, 33, 35.5, 32),
       width: double.infinity,
       height: 139,
       decoration: BoxDecoration(
@@ -18,96 +18,71 @@ class PartidoInfo extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          _buildEquipoContainer(partido.local),
+          SizedBox(
+              width: 40.5), // Ajusta el ancho del espacio entre contenedores
+          _buildHoraCanchaContainer(partido.hora, partido.cancha),
+          SizedBox(
+              width: 40.5), // Ajusta el ancho del espacio entre contenedores
+          _buildEquipoContainer(partido.visita),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEquipoContainer(Equipo equipo) {
+    return Container(
+      width: 69,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
           Container(
-            width: 69,
-            height: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(9.5, 0, 9.5, 10),
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(partido.local.imagenURL),
-                    ),
-                  ),
-                ),
-                Text(
-                  partido.local.nombreEquipo,
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff000000),
-                  ),
-                ),
-              ],
+            margin: EdgeInsets.fromLTRB(9.5, 0, 9.5, 10),
+            height: 48,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(equipo.imagenURL),
+              ),
             ),
           ),
-          SizedBox(
-            width: 40.5,
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 2, 0, 3),
-            height: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                  child: Text(
-                    partido.hora, // Ajusta cómo se muestra la hora
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xff000000),
-                    ),
-                  ),
-                ),
-                Text(
-                  partido.cancha,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff015c1a),
-                  ),
-                ),
-              ],
+          Text(
+            equipo.nombreEquipo,
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+              color: Color(0xff000000),
             ),
           ),
-          SizedBox(
-            width: 40.5,
-          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHoraCanchaContainer(String hora, String cancha) {
+    return Container(
+      height: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
           Container(
-            width: 69,
-            height: 138,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(9.5, 0, 9.5, 10),
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(partido.visita.imagenURL),
-                    ),
-                  ),
-                ),
-                Text(
-                  partido.visita.nombreEquipo,
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff000000),
-                  ),
-                ),
-              ],
+            margin: EdgeInsets.only(bottom: 20),
+            child: Text(
+              hora,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Color(0xff000000),
+              ),
+            ),
+          ),
+          Text(
+            cancha,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: Color(0xff015c1a),
             ),
           ),
         ],
