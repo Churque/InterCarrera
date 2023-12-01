@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/pages/add_team_page.dart';
 import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
@@ -17,6 +19,93 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndexDay = 0;
   int _selectedIndexPage = 0;
+  late DateTime now;
+
+  final List<String> months = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(Duration(minutes: 1), (Timer timer) {
+      setState(() {
+        // Actualizar la fecha actual
+        now = DateTime.now();
+      });
+    });
+
+    // Obtener la fecha actual al inicio
+    now = DateTime.now();
+  }
+
+  List<Partido> getPartidosFiltrados(String type) {
+    // Filtrar partidos según la fecha actual
+    if (type == 'hoy') {
+      return misPartidos
+          .where((partido) =>
+              partido.fecha.day == now.day &&
+              partido.fecha.month == now.month &&
+              partido.fecha.year == now.year)
+          .toList();
+    } else if (type == 'ayer') {
+      final yesterday = now.subtract(Duration(days: 1));
+      return misPartidos
+          .where((partido) =>
+              partido.fecha.day == yesterday.day &&
+              partido.fecha.month == yesterday.month &&
+              partido.fecha.year == yesterday.year)
+          .toList();
+    } else if (type == 'manana') {
+      final tomorrow = now.add(Duration(days: 1));
+      return misPartidos
+          .where((partido) =>
+              partido.fecha.day == tomorrow.day &&
+              partido.fecha.month == tomorrow.month &&
+              partido.fecha.year == tomorrow.year)
+          .toList();
+    }
+    return [];
+  }
+
+  String getFormattedDate(DateTime date) {
+    final daysOfWeek = [
+      'Lunes',
+      'Martes',
+      'Miércoles',
+      'Jueves',
+      'Viernes',
+      'Sábado',
+      'Domingo'
+    ];
+    final months = [
+      'ENE',
+      'FEB',
+      'MAR',
+      'ABR',
+      'MAY',
+      'JUN',
+      'JUL',
+      'AGO',
+      'SEP',
+      'OCT',
+      'NOV',
+      'DIC'
+    ];
+    return '${daysOfWeek[date.weekday - 1]} ${date.day} ${months[date.month - 1]}. ${date.year}';
+  }
+
   final List<String> days = ["Ayer", "Hoy", "Mañana"];
 
   void _onDayTapped(int index) {
@@ -42,6 +131,16 @@ class _MyHomePageState extends State<MyHomePage> {
         Navigator.pushNamed(context, '/ranking');
       }
     });
+  }
+
+  DateTime getSelectedDate() {
+    if (_selectedIndexDay == 0) {
+      return now.subtract(Duration(days: 1));
+    } else if (_selectedIndexDay == 1) {
+      return now;
+    } else {
+      return now.add(Duration(days: 1));
+    }
   }
 
   @override
@@ -109,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           child: Center(
             child: Text(
-              'Lunes 25 SEP. 2023',
+              getFormattedDate(getSelectedDate()),
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
@@ -119,7 +218,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Column(
-          children: misPartidos
+          children: getPartidosFiltrados(days[_selectedIndexDay].toLowerCase())
               .map((partido) => PartidoInfo(partido: partido))
               .toList(),
         ),

@@ -6,12 +6,22 @@ class Partido {
   final Equipo visita;
   final String cancha;
   final String hora;
+  final DateTime fecha;
+  final bool live;
+  final bool finalizado;
+  final int golesLocal;
+  final int golesVisita;
 
   Partido({
     required this.local,
     required this.visita,
     required this.cancha,
     required this.hora,
+    required this.fecha,
+    required this.live,
+    required this.finalizado,
+    required this.golesLocal,
+    required this.golesVisita,
   });
 }
 
@@ -37,6 +47,12 @@ List<Partido> misPartidos = [
     ),
     cancha: 'Cancha N°1',
     hora: "13:00",
+    //      DateTime(año, mes, día, hora, minuto)
+    fecha: DateTime(2023, 12, 1, 14, 30),
+    live: false,
+    finalizado: false,
+    golesLocal: 0,
+    golesVisita: 0,
   ),
   Partido(
     local: Equipo(
@@ -59,6 +75,11 @@ List<Partido> misPartidos = [
     ),
     cancha: 'Cancha N°1',
     hora: "13:00",
+    fecha: DateTime(2023, 12, 1, 14, 30),
+    live: false,
+    finalizado: false,
+    golesLocal: 0,
+    golesVisita: 0,
   ),
   Partido(
     local: Equipo(
@@ -81,6 +102,11 @@ List<Partido> misPartidos = [
     ),
     cancha: 'Cancha N°1',
     hora: "13:00",
+    fecha: DateTime(2023, 12, 1, 14, 30),
+    live: false,
+    finalizado: false,
+    golesLocal: 0,
+    golesVisita: 0,
   ),
   Partido(
     local: Equipo(
@@ -102,6 +128,11 @@ List<Partido> misPartidos = [
       jugadores: [], // Agrega jugadores
     ),
     cancha: 'Cancha N°1',
-    hora: "15:00",
+    hora: "14:30",
+    fecha: DateTime(2023, 11, 30, 14, 30),
+    live: false,
+    finalizado: false,
+    golesLocal: 0,
+    golesVisita: 0,
   ),
 ];
