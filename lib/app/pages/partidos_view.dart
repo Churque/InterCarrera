@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/app/pages/add_team_page.dart';
 import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
 import 'package:kdksdkskdxd/app/widgets/partido_info.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
@@ -51,6 +52,18 @@ class _MyHomePageState extends State<MyHomePage> {
           "InterCarrera",
           style: TextStyle(fontSize: 16, color: Colors.white),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              // Navegar a la pantalla de añadir equipo
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AnadirEquipo()),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
