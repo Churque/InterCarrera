@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
 import 'package:kdksdkskdxd/app/widgets/equipo_info.dart';
-import 'package:kdksdkskdxd/entities/equipo.dart';
-import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
+import 'package:kdksdkskdxd/entities/grupo.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class MyClasificationPage extends StatefulWidget {
+  //const MyClasificationPage({super.key});
+  const MyClasificationPage({Key? key}) : super(key: key);
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<MyClasificationPage> createState() => _MyClasificationPage();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _MyClasificationPage extends State<MyClasificationPage> {
   int _selectedIndexPage = 1;
 
   @override
@@ -26,60 +25,20 @@ class _MyWidgetState extends State<MyWidget> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            GrupoInfoWidget(groupName: 'GRUPO A'),
-            EquipoInfoWidget(
-              equipo: Equipo(
-                posicion: 1,
-                nombreEquipo: 'FC Barcelona',
-                imagenURL:
-                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-                estadisticas: EquipoEstadisticas(
-                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                jugadores: [],
-              ),
-            ),
-            EquipoInfoWidget(
-              equipo: Equipo(
-                posicion: 1,
-                nombreEquipo: 'FC Barcelona',
-                imagenURL:
-                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-                estadisticas: EquipoEstadisticas(
-                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                jugadores: [],
-              ),
-            ),
-            EquipoInfoWidget(
-              equipo: Equipo(
-                posicion: 1,
-                nombreEquipo: 'FC Barcelona',
-                imagenURL:
-                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-                estadisticas: EquipoEstadisticas(
-                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                jugadores: [],
-              ),
-            ),
-            EquipoInfoWidget(
-              equipo: Equipo(
-                posicion: 1,
-                nombreEquipo: 'FC Barcelona',
-                imagenURL:
-                    'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-                estadisticas: EquipoEstadisticas(
-                    pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                jugadores: [],
-              ),
-            ),
-            GrupoInfoWidget(groupName: 'GRUPO B'),
-            GrupoInfoWidget(groupName: 'GRUPO C'),
+            Column(
+              children: [
+                for (var grupo in tusGrupos) GrupoWidget(grupo: grupo),
+              ],
+            )
           ],
         ),
       ),
+      /*
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: _selectedIndexPage,
         onItemTapped: _onItemTapped,
       ),
+      */
     );
   }
 
@@ -99,6 +58,22 @@ class _MyWidgetState extends State<MyWidget> {
         Navigator.pushNamed(context, '/ranking');
       }
     });
+  }
+}
+
+class GrupoWidget extends StatelessWidget {
+  final Grupo grupo;
+
+  const GrupoWidget({required this.grupo});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        GrupoInfoWidget(groupName: grupo.nombre),
+        for (var equipo in grupo.equipos) EquipoInfoWidget(equipo: equipo),
+      ],
+    );
   }
 }
 

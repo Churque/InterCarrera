@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/app/pages/main_screen.dart';
 import 'package:kdksdkskdxd/app/routes.dart';
 
 void main() {
@@ -15,8 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
       ),
-      initialRoute: '/',
-      routes: routes,
+      home: const MainScreen(),
+      //initialRoute: '/',
+      //routes: routes,
     );
   }
 }

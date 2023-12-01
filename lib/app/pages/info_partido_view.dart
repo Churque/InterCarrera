@@ -14,22 +14,6 @@ class MyInfoPartidoPage extends StatefulWidget {
 }
 
 class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
-  Jugador miJugador = Jugador(
-      nombre: 'Lionel Messi',
-      // imagenURL:
-      //    'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
-      equipo: Equipo(
-        posicion: 1,
-        nombreEquipo: 'FC Barcelona',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-        jugadores: [],
-      ),
-      goles: 8,
-      numCamiseta: 13);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -320,7 +304,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TeamResults(),
-                SizedBox(width: 155),
+                SizedBox(width: 130),
                 TeamResultsRight(),
               ],
             ),

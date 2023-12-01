@@ -6,7 +6,8 @@ import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage();
+  //const MyHomePage();
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -59,10 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      /*
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: _selectedIndexPage,
         onItemTapped: _onItemTapped,
       ),
+      */
     );
   }
 
@@ -103,56 +106,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Column(
-          children: [
-            PartidoInfo(
-              partido: Partido(
-                local: Equipo(
-                  posicion: 1,
-                  nombreEquipo: 'VILAREAL CF',
-                  imagenURL:
-                      'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
-                  estadisticas: EquipoEstadisticas(
-                      pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                  jugadores: [], // Agrega jugadores
-                ),
-                visita: Equipo(
-                  posicion: 2,
-                  nombreEquipo: 'GIRONA FC',
-                  imagenURL:
-                      'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
-                  estadisticas: EquipoEstadisticas(
-                      pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                  jugadores: [],
-                ),
-                cancha: 'Cancha N°1',
-                hora: "13:00",
-              ),
-            ),
-            PartidoInfo(
-              partido: Partido(
-                local: Equipo(
-                  posicion: 1,
-                  nombreEquipo: 'VILAREAL CF',
-                  imagenURL:
-                      'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
-                  estadisticas: EquipoEstadisticas(
-                      pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                  jugadores: [], // Agrega jugadores
-                ),
-                visita: Equipo(
-                  posicion: 2,
-                  nombreEquipo: 'GIRONA FC',
-                  imagenURL:
-                      'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
-                  estadisticas: EquipoEstadisticas(
-                      pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-                  jugadores: [], // Agrega jugadores
-                ),
-                cancha: 'Cancha N°1',
-                hora: "13:00", // Ajusta la hora
-              ),
-            ),
-          ],
+          children: misPartidos
+              .map((partido) => PartidoInfo(partido: partido))
+              .toList(),
         ),
       ],
     );
