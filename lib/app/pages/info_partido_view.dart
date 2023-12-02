@@ -5,15 +5,34 @@ import 'package:kdksdkskdxd/app/widgets/match_info.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
+import 'package:kdksdkskdxd/entities/partido.dart';
 
 class MyInfoPartidoPage extends StatefulWidget {
-  const MyInfoPartidoPage();
+  const MyInfoPartidoPage({required this.partido});
+
+  final Partido partido;
 
   @override
   _MyInfoPartidoPage createState() => _MyInfoPartidoPage();
 }
 
 class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
+  late Partido partido; // Variable local para almacenar el partido
+  List<Jugador> jugadores = []; // Lista de jugadores del equipo seleccionado
+
+  @override
+  void initState() {
+    super.initState();
+    partido = widget.partido;
+    jugadores = partido.local.jugadores;
+  }
+
+  void updateJugadores(Equipo equipo) {
+    setState(() {
+      jugadores = equipo.jugadores;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,212 +46,22 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildMatchInfoRow(),
+            _buildMatchInfoRow(partido),
             _buildRecentResults(),
             tituloJugadores(),
-            NavBarJugadoresEquipo(),
-            JugadorWidget(
-              nombre: 'Lionel messi',
-              imagenURL:
-                  'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
-              numCamiseta: 10,
+            NavBarJugadoresEquipo(
+              equipoLocal: partido.local,
+              equipoVisita: partido.visita,
+              onEquipoTapped: updateJugadores,
             ),
-            JugadorWidget(
-              nombre: 'Lionel messi',
-              imagenURL:
-                  'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
-              numCamiseta: 10,
-            ),
-            JugadorWidget(
-              nombre: 'Lionel messi',
-              imagenURL:
-                  'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
-              numCamiseta: 10,
-            ),
-            JugadorWidget(
-              nombre: 'Lionel messi',
-              imagenURL:
-                  'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44',
-              numCamiseta: 10,
-            ),
+            for (var jugador in jugadores)
+              JugadorWidget(
+                nombre: jugador.nombre,
+                imagenURL: jugador.imagenURL,
+                numCamiseta: jugador.numCamiseta,
+              ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget containerJugador() {
-    return Container(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: EdgeInsets.fromLTRB(30, 6.5, 29.5, 6.5),
-            width: double.infinity,
-            height: 55,
-            decoration: BoxDecoration(
-              border: Border.all(color: Color(0xffd9d9d9)),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: double.infinity,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 15, 0),
-                        width: 42,
-                        height: 42,
-                        decoration: BoxDecoration(
-                          shape: BoxShape
-                              .circle, // Cambiado a BoxShape.circle para hacer un círculo
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://preview.redd.it/arturo-vidal-v0-d7zwvhnwokbb1.jpg?width=640&crop=smart&auto=webp&s=44bb726ba2d2c56fe7988d71006e436ceec67a44'), // Reemplaza con la URL de tu imagen
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Ciro inmobile',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          height: 1.5,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Spacer(), // Agregado Spacer para empujar el número "17" a la derecha
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 1, 0, 0),
-                  child: Text(
-                    '17',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900,
-                      height: 1.2125,
-                      color: Color(0xff000000),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget tituloJugadoresEquipo() {
-    return Container(
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-      width: double.infinity,
-      height: 53,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                // Lógica para manejar el clic en Villareal CF
-                print('Clic en Villareal CF');
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xffd9d9d9)),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 10),
-                      width: 27,
-                      height: 27,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                              'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png'),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'VILLAREAL CF',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        height: 1.5,
-                        color: Color(0xff000000),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                // Lógica para manejar el clic en Girona FC
-                print('Clic en Girona FC');
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xffd9d9d9)),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'GIRONA FC',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        height: 1.5,
-                        color: Color(0xff000000),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 10),
-                      width: 27,
-                      height: 27,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                              'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png'),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -243,14 +72,13 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
       height: 54,
       decoration: BoxDecoration(
         border: Border.all(color: Color(0xffd9d9d9)),
-        color: Color(0xffffffff),
       ),
       child: Center(
         child: Text(
           'Jugadores',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: 'Urbanist',
             fontSize: 16,
             fontWeight: FontWeight.w900,
             height: 1.2125,
@@ -261,7 +89,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
     );
   }
 
-  Widget _buildMatchInfoRow() {
+  Widget _buildMatchInfoRow(Partido partido) {
     return Container(
       height: 171,
       padding: EdgeInsets.all(15),
@@ -269,7 +97,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
       decoration: BoxDecoration(
         border: Border.all(color: Color(0xffcccccc)),
       ),
-      child: MatchInfoRow(),
+      child: MatchInfoRow(partido: partido),
     );
   }
 
@@ -289,7 +117,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
             child: Text(
               'Resultados Recientes',
               style: TextStyle(
-                fontFamily: 'Inter',
+                fontFamily: 'Urbanist',
                 fontSize: 16,
                 fontWeight: FontWeight.w900,
                 color: Color(0xff000000),
@@ -303,9 +131,9 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TeamResults(),
-                SizedBox(width: 130),
-                TeamResultsRight(),
+                buildTeamResults(),
+                SizedBox(width: 125),
+                buildTeamResultsRight(),
               ],
             ),
           ),
@@ -313,13 +141,10 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
       ),
     );
   }
-}
 
-class TeamResults extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget buildTeamResults() {
     return Container(
-      width: 110,
+      width: 100,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -332,9 +157,9 @@ class TeamResults extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(right: 10),
                   child: Text(
-                    'Vil',
+                    partido.local.nombreEquipo.substring(0, 3),
                     style: TextStyle(
-                      fontFamily: 'Inter',
+                      fontFamily: 'Urbanist',
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
                       color: Color(0xff000000),
@@ -348,8 +173,7 @@ class TeamResults extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14.5),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(
-                          'https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Villarreal_CF_logo-en.svg/1200px-Villarreal_CF_logo-en.svg.png'),
+                      image: NetworkImage(partido.local.imagenURL),
                     ),
                   ),
                 ),
@@ -383,7 +207,7 @@ class TeamResults extends StatelessWidget {
                               index % 2 == 0 ? 'P' : 'G',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontFamily: 'Inter',
+                                fontFamily: 'Urbanist',
                                 fontSize: 9,
                                 fontWeight: FontWeight.w900,
                                 color: Color(0xffffffff),
@@ -411,11 +235,8 @@ class TeamResults extends StatelessWidget {
       ),
     );
   }
-}
 
-class TeamResultsRight extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget buildTeamResultsRight() {
     return Container(
       width: 100,
       child: Column(
@@ -423,16 +244,16 @@ class TeamResultsRight extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(36, 0, 0, 10),
+            margin: EdgeInsets.fromLTRB(34, 0, 0, 10),
             width: double.infinity,
             child: Row(
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 5, 10, 0),
                   child: Text(
-                    'Gir',
+                    partido.visita.nombreEquipo.substring(0, 3),
                     style: TextStyle(
-                      fontFamily: 'Inter',
+                      fontFamily: 'Urbanist',
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
                       color: Color(0xff000000),
@@ -443,7 +264,7 @@ class TeamResultsRight extends StatelessWidget {
                   width: 29,
                   height: 29,
                   child: Image.network(
-                    'https://static.wikia.nocookie.net/fifa/images/5/5d/Girona_FC.png/revision/latest?cb=20161228190707',
+                    partido.visita.imagenURL,
                     width: 29,
                     height: 29,
                   ),
@@ -489,7 +310,7 @@ class TeamResultsRight extends StatelessWidget {
                               index % 2 == 0 ? 'P' : 'G',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontFamily: 'Inter',
+                                fontFamily: 'Urbanist',
                                 fontSize: 9,
                                 fontWeight: FontWeight.w900,
                                 color: Color(0xffffffff),

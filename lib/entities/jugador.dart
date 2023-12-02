@@ -1,97 +1,76 @@
+import 'dart:math';
+
 import 'package:kdksdkskdxd/entities/equipo.dart';
-import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 
 class Jugador {
+  final int id;
   final String nombre;
-  final Equipo equipo;
+  final int equipoID;
   final int numCamiseta;
   final int goles;
   final int asistencias;
   final String imagenURL;
 
   Jugador({
+    required this.id,
     required this.nombre,
-    required this.equipo,
+    required this.equipoID,
     required this.numCamiseta,
     required this.goles,
     required this.asistencias,
     required this.imagenURL,
   });
+
+  Equipo? get equipo {
+    Equipo? encontrado;
+    try {
+      encontrado = misEquipos.firstWhere((equipo) => equipo.id == equipoID);
+    } catch (e) {
+      // Manejar el caso en que no se encuentra el equipo
+      print('Equipo no encontrado para el jugador $nombre');
+    }
+    return encontrado;
+  }
 }
 
 List<Jugador> misJugadores = [
   Jugador(
+      id: 1,
+      equipoID: 1,
       nombre: 'Lionel Messi',
-      equipo: Equipo(
-        posicion: 1,
-        nombreEquipo: 'PESSI',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-        jugadores: [],
-      ),
       goles: 50,
       asistencias: 12,
       numCamiseta: 10,
       imagenURL:
           'https://jobs4football.com/wp-content/uploads/2022/12/b7f9f682d8c4930b36c3f6ac4e4cbc6bLionel-Messi.png'),
   Jugador(
+      id: 2,
       nombre: 'Arturo Vidal',
-      equipo: Equipo(
-        posicion: 1,
-        nombreEquipo: 'Tengo',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-        jugadores: [],
-      ),
+      equipoID: 2,
       goles: 7,
       asistencias: 11,
       numCamiseta: 5,
       imagenURL: 'https://cdn.soccerwiki.org/images/player/78694.png'),
   Jugador(
+      id: 3,
       nombre: 'Lionel Messi',
-      equipo: Equipo(
-        posicion: 1,
-        nombreEquipo: 'FC XD FUNCIONA?',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-        jugadores: [],
-      ),
+      equipoID: 3,
       goles: 6,
       asistencias: 30,
       numCamiseta: 1,
       imagenURL: 'https://cdn.soccerwiki.org/images/player/78694.png'),
   Jugador(
+      id: 4,
       nombre: 'Lionel Messi',
-      equipo: Equipo(
-        posicion: 1,
-        nombreEquipo: 'FC XD FUNCIONA?',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-        jugadores: [],
-      ),
+      equipoID: 4,
       goles: 2,
       asistencias: 3,
       numCamiseta: 3,
       imagenURL: 'https://cdn.soccerwiki.org/images/player/78694.png'),
   Jugador(
+      id: 5,
       nombre: 'Lionel Messi',
-      equipo: Equipo(
-        posicion: 1,
-        nombreEquipo: 'FC XD FUNCIONA?',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-        jugadores: [],
-      ),
+      equipoID: 4,
       goles: 6,
       asistencias: 6,
       numCamiseta: 6,
@@ -124,5 +103,54 @@ List<Jugador> topAsistidores = obtenerTopAsistidores(misJugadores, 3);
 List<Jugador> topGoleadoresYAsistidores =
     obtenerTopGoleadoresYAsistidores(misJugadores, 3);
 
-// Ahora, puedes usar estos listados en tu código.
+List<Jugador> misJugadores1 = List.generate(5, (index) {
+  return Jugador(
+    id: 6,
+    nombre: 'Jugador_${index + 1}',
+    equipoID: 1,
+    goles: Random().nextInt(50) + 1,
+    asistencias: Random().nextInt(20) + 1,
+    numCamiseta: Random().nextInt(99) + 1,
+    imagenURL:
+        'https://jobs4football.com/wp-content/uploads/2022/12/b7f9f682d8c4930b36c3f6ac4e4cbc6bLionel-Messi.png',
+  );
+});
 
+List<Jugador> misJugadores2 = List.generate(5, (index) {
+  return Jugador(
+    id: 1,
+    equipoID: 1,
+    nombre: 'Jugador_${index + 6}',
+    goles: Random().nextInt(50) + 1,
+    asistencias: Random().nextInt(20) + 1,
+    numCamiseta: Random().nextInt(99) + 1,
+    imagenURL:
+        'https://jobs4football.com/wp-content/uploads/2022/12/b7f9f682d8c4930b36c3f6ac4e4cbc6bLionel-Messi.png',
+  );
+});
+
+List<Jugador> misJugadores3 = List.generate(5, (index) {
+  return Jugador(
+    id: 2,
+    equipoID: 1,
+    nombre: 'Jugador_${index + 11}',
+    goles: Random().nextInt(50) + 1,
+    asistencias: Random().nextInt(20) + 1,
+    numCamiseta: Random().nextInt(99) + 1,
+    imagenURL:
+        'https://jobs4football.com/wp-content/uploads/2022/12/b7f9f682d8c4930b36c3f6ac4e4cbc6bLionel-Messi.png',
+  );
+});
+
+List<Jugador> misJugadores4 = List.generate(5, (index) {
+  return Jugador(
+    id: 3,
+    equipoID: 1,
+    nombre: 'Jugador_${index + 16}',
+    goles: Random().nextInt(50) + 1,
+    asistencias: Random().nextInt(20) + 1,
+    numCamiseta: Random().nextInt(99) + 1,
+    imagenURL:
+        'https://jobs4football.com/wp-content/uploads/2022/12/b7f9f682d8c4930b36c3f6ac4e4cbc6bLionel-Messi.png',
+  );
+});

@@ -53,7 +53,7 @@ class JugadorWidget extends StatelessWidget {
                         nombre,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Urbanist',
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                           height: 1.5,
@@ -69,7 +69,7 @@ class JugadorWidget extends StatelessWidget {
                     numCamiseta.toString(),
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontFamily: 'Poppins',
+                      fontFamily: 'Urbanist',
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
                       color: Color(0xff000000),

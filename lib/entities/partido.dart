@@ -1,13 +1,15 @@
+import 'package:intl/intl.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
+import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class Partido {
   final Equipo local;
   final Equipo visita;
   final String cancha;
-  final String hora;
+  // final String hora;
   final DateTime fecha;
-  final bool live;
+  bool live;
   final bool finalizado;
   final int golesLocal;
   final int golesVisita;
@@ -16,7 +18,7 @@ class Partido {
     required this.local,
     required this.visita,
     required this.cancha,
-    required this.hora,
+    //  required this.hora,
     required this.fecha,
     required this.live,
     required this.finalizado,
@@ -27,27 +29,33 @@ class Partido {
 
 List<Partido> misPartidos = [
   Partido(
-    local: Equipo(
-      posicion: 1,
-      nombreEquipo: 'VILAREAL CF',
-      imagenURL:
-          'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
-      estadisticas: EquipoEstadisticas(
-          pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-      jugadores: [], // Agrega jugadores
-    ),
-    visita: Equipo(
-      posicion: 2,
-      nombreEquipo: 'GIRONA FC',
-      imagenURL:
-          'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
-      estadisticas: EquipoEstadisticas(
-          pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-      jugadores: [],
-    ),
+    local: misEquipos[0],
+    visita: misEquipos[1],
     cancha: 'Cancha N°1',
-    hora: "13:00",
-    //      DateTime(año, mes, día, hora, minuto)
+    //  hora: "13:00",
+    //     DateTime(año, mes, día, hora, minuto)
+    fecha: DateTime(2023, 12, 2, 0, 49),
+    live: false,
+    finalizado: false,
+    golesLocal: 0,
+    golesVisita: 0,
+  ),
+  Partido(
+    local: misEquipos[2],
+    visita: misEquipos[3],
+    cancha: 'Cancha N°1',
+    // hora: "13:00",
+    fecha: DateTime(2023, 12, 2, 14, 30),
+    live: false,
+    finalizado: false,
+    golesLocal: 0,
+    golesVisita: 0,
+  ),
+  Partido(
+    local: misEquipos[4],
+    visita: misEquipos[5],
+    cancha: 'Cancha N°1',
+    // hora: "13:00",
     fecha: DateTime(2023, 12, 1, 14, 30),
     live: false,
     finalizado: false,
@@ -55,26 +63,10 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    local: Equipo(
-      posicion: 1,
-      nombreEquipo: 'VILAREAL CF',
-      imagenURL:
-          'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
-      estadisticas: EquipoEstadisticas(
-          pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-      jugadores: [], // Agrega jugadores
-    ),
-    visita: Equipo(
-      posicion: 2,
-      nombreEquipo: 'GIRONA FC',
-      imagenURL:
-          'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
-      estadisticas: EquipoEstadisticas(
-          pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-      jugadores: [], // Agrega jugadores
-    ),
+    local: misEquipos[6],
+    visita: misEquipos[7],
     cancha: 'Cancha N°1',
-    hora: "13:00",
+    //  hora: "14:30",
     fecha: DateTime(2023, 12, 1, 14, 30),
     live: false,
     finalizado: false,
@@ -82,26 +74,10 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    local: Equipo(
-      posicion: 1,
-      nombreEquipo: 'VILAREAL CF',
-      imagenURL:
-          'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
-      estadisticas: EquipoEstadisticas(
-          pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-      jugadores: [], // Agrega jugadores
-    ),
-    visita: Equipo(
-      posicion: 2,
-      nombreEquipo: 'GIRONA FC',
-      imagenURL:
-          'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
-      estadisticas: EquipoEstadisticas(
-          pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-      jugadores: [], // Agrega jugadores
-    ),
+    local: misEquipos[7],
+    visita: misEquipos[8],
     cancha: 'Cancha N°1',
-    hora: "13:00",
+    //  hora: "14:30",
     fecha: DateTime(2023, 12, 1, 14, 30),
     live: false,
     finalizado: false,
@@ -109,27 +85,22 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    local: Equipo(
-      posicion: 1,
-      nombreEquipo: 'VILAREAL CF',
-      imagenURL:
-          'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png',
-      estadisticas: EquipoEstadisticas(
-          pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-      jugadores: [], // Agrega jugadores
-    ),
-    visita: Equipo(
-      posicion: 2,
-      nombreEquipo: 'GIRONA FC',
-      imagenURL:
-          'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png',
-      estadisticas: EquipoEstadisticas(
-          pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: "+6"),
-      jugadores: [], // Agrega jugadores
-    ),
+    local: misEquipos[9],
+    visita: misEquipos[10],
     cancha: 'Cancha N°1',
-    hora: "14:30",
-    fecha: DateTime(2023, 11, 30, 14, 30),
+    //  hora: DateFormat.Hm().format(DateTime(2023, 12, 1, 14, 30)),
+    fecha: DateTime(2023, 12, 1, 14, 30),
+    live: false,
+    finalizado: false,
+    golesLocal: 0,
+    golesVisita: 0,
+  ),
+  Partido(
+    local: misEquipos[11],
+    visita: misEquipos[12],
+    cancha: 'Cancha N°1',
+    //  hora: "14:30",
+    fecha: DateTime(2023, 12, 2, 14, 30),
     live: false,
     finalizado: false,
     golesLocal: 0,

@@ -86,7 +86,7 @@ Widget buildBotonVerTodos() {
         child: Text(
           'Ver todos',
           style: TextStyle(
-            fontFamily: 'Poppins',
+            fontFamily: 'Urbanist',
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Color(0xff000000),
@@ -140,16 +140,16 @@ class JugadorInfoWidget extends StatelessWidget {
                   Text(
                     jugador.nombre,
                     style: TextStyle(
-                      fontFamily: 'Poppins',
+                      fontFamily: 'Urbanist',
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: Color(0xff000000),
                     ),
                   ),
                   Text(
-                    jugador.equipo.nombreEquipo,
+                    jugador.equipo?.nombreEquipo ?? 'Equipo no encontrado',
                     style: TextStyle(
-                      fontFamily: 'Poppins',
+                      fontFamily: 'Urbanist',
                       fontSize: 8,
                       fontWeight: FontWeight.w400,
                       height: 1.5,
@@ -165,7 +165,7 @@ class JugadorInfoWidget extends StatelessWidget {
             child: Text(
               puntuacion,
               style: TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'Urbanist',
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
                 color: Color(0xff000000),
@@ -194,7 +194,7 @@ class GrupoInfoWidget extends StatelessWidget {
       child: Text(
         tipoRank,
         style: TextStyle(
-          fontFamily: 'Poppins',
+          fontFamily: 'Urbanist',
           fontSize: 13,
           fontWeight: FontWeight.w600,
           height: 1.5,

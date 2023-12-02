@@ -27,7 +27,7 @@ class EquipoInfoWidget extends StatelessWidget {
                   child: Text(
                     equipo.posicion.toString(),
                     style: TextStyle(
-                      fontFamily: 'Poppins',
+                      fontFamily: 'Urbanist',
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       height: 1.5,
@@ -60,7 +60,7 @@ class EquipoInfoWidget extends StatelessWidget {
                         child: Text(
                           equipo.nombreEquipo,
                           style: TextStyle(
-                            fontFamily: 'Poppins',
+                            fontFamily: 'Urbanist',
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
                             height: 1.5,
@@ -86,7 +86,7 @@ class EquipoInfoWidget extends StatelessWidget {
                       stat.toString(),
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: 'Urbanist',
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
                         height: 1.5,

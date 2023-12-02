@@ -15,57 +15,14 @@ class Grupo {
 }
 
 List<Grupo> tusGrupos = [
-  Grupo(nombre: 'GRUPO A', id: 1, equipos: misEquipos),
-  Grupo(
-    nombre: 'GRUPO B',
-    id: 1,
-    equipos: [
-      Equipo(
-        posicion: 1,
-        nombreEquipo: 'FC Barcelona',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-        jugadores: [],
-      ),
-    ],
-  ),
+  Grupo(nombre: 'GRUPO A', id: 1, equipos: misEquipos.sublist(0, 4)),
+  Grupo(nombre: 'GRUPO B', id: 1, equipos: misEquipos.sublist(5, 10)),
   Grupo(
     nombre: 'GRUPO C',
     id: 1,
-    equipos: [
-      Equipo(
-        posicion: 1,
-        nombreEquipo: 'FC Barcelona',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-        jugadores: [],
-      ),
-      Equipo(
-        posicion: 1,
-        nombreEquipo: 'FC Barcelona',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-        jugadores: [],
-      ),
-      Equipo(
-        posicion: 1,
-        nombreEquipo: 'FC Barcelona',
-        imagenURL:
-            'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
-        estadisticas: EquipoEstadisticas(
-            pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-        jugadores: [],
-      ),
-    ],
+    equipos: misEquipos.sublist(11, 13),
   ),
   // Otros grupos
 ];
 
 // ...
-

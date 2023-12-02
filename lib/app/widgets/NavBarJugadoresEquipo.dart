@@ -1,17 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/entities/equipo.dart';
 
 class NavBarJugadoresEquipo extends StatefulWidget {
+  const NavBarJugadoresEquipo({
+    required this.equipoLocal,
+    required this.equipoVisita,
+    required this.onEquipoTapped, // Agrega esta línea
+  });
+  final Equipo equipoLocal;
+  final Equipo equipoVisita;
+  final Function(Equipo) onEquipoTapped; // Agrega esta línea
+
   @override
   _NavBarJugadoresEquipo createState() => _NavBarJugadoresEquipo();
 }
 
 class _NavBarJugadoresEquipo extends State<NavBarJugadoresEquipo> {
-  int _selectedIndex = -1;
+  int _selectedIndex = 0;
+
+  late Equipo equipoLocal;
+  late Equipo equipoVisita;
+
+  @override
+  void initState() {
+    super.initState();
+    equipoLocal = widget.equipoLocal;
+    equipoVisita = widget.equipoVisita;
+  }
 
   void _onContainerTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+
+    widget.onEquipoTapped(index == 0 ? equipoLocal : equipoVisita);
   }
 
   @override
@@ -26,8 +48,6 @@ class _NavBarJugadoresEquipo extends State<NavBarJugadoresEquipo> {
             child: InkWell(
               onTap: () {
                 _onContainerTapped(0);
-
-                print('Clic en Villareal CF');
               },
               child: Ink(
                 decoration: BoxDecoration(
@@ -56,14 +76,15 @@ class _NavBarJugadoresEquipo extends State<NavBarJugadoresEquipo> {
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                                'https://assets.stickpng.com/images/584a9b57b080d7616d298779.png'),
+                              equipoLocal.imagenURL,
+                            ),
                           ),
                         ),
                       ),
                       Text(
-                        'VILLAREAL CF',
+                        equipoLocal.nombreEquipo,
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Urbanist',
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                           height: 1.5,
@@ -80,8 +101,6 @@ class _NavBarJugadoresEquipo extends State<NavBarJugadoresEquipo> {
             child: InkWell(
               onTap: () {
                 _onContainerTapped(1);
-                // Lógica para manejar el clic en Girona FC
-                print('Clic en Girona FC');
               },
               child: Ink(
                 decoration: BoxDecoration(
@@ -102,9 +121,9 @@ class _NavBarJugadoresEquipo extends State<NavBarJugadoresEquipo> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'GIRONA FC',
+                        equipoVisita.nombreEquipo,
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Urbanist',
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                           height: 1.5,
@@ -119,8 +138,7 @@ class _NavBarJugadoresEquipo extends State<NavBarJugadoresEquipo> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://upload.wikimedia.org/wikipedia/en/7/7a/Girona_FC_new_logo.png'),
+                            image: NetworkImage(equipoVisita.imagenURL),
                           ),
                         ),
                       ),

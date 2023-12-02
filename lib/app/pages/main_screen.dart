@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
       const MyHomePage(),
       const MyClasificationPage(),
       const MyRankingPage(),
-      const MyInfoPartidoPage()
+      // const MyInfoPartidoPage()
     ];
 
     return Scaffold(

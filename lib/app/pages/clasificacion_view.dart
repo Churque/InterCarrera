@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/widgets/equipo_info.dart';
+import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/grupo.dart';
 
 class MyClasificationPage extends StatefulWidget {
@@ -68,6 +69,14 @@ class GrupoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    grupo.equipos.sort();
+
+    List<Equipo> equiposOrdenados = List.from(grupo.equipos);
+    equiposOrdenados.sort();
+
+    for (int i = 0; i < equiposOrdenados.length; i++) {
+      equiposOrdenados[i].posicion = i + 1;
+    }
     return Column(
       children: [
         GrupoInfoWidget(groupName: grupo.nombre),
@@ -100,7 +109,7 @@ class GrupoInfoWidget extends StatelessWidget {
             child: Text(
               groupName,
               style: TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'Urbanist',
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
                 height: 1.5,

@@ -17,7 +17,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndexDay = 0;
+  int _selectedIndexDay = 1;
   int _selectedIndexPage = 0;
   late DateTime now;
 
