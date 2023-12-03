@@ -16,12 +16,6 @@ class _MyRankingState extends State<MyRankingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "InterCarrera",
-          style: TextStyle(fontSize: 16, color: Colors.white),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
