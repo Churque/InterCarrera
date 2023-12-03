@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/widgets/JugadorWidget.dart';
 import 'package:kdksdkskdxd/app/widgets/NavBarJugadoresEquipo.dart';
 import 'package:kdksdkskdxd/app/widgets/match_info.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
-import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
+import 'package:kdksdkskdxd/entities/historial_partido.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
 
@@ -17,8 +19,8 @@ class MyInfoPartidoPage extends StatefulWidget {
 }
 
 class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
-  late Partido partido; // Variable local para almacenar el partido
-  List<Jugador> jugadores = []; // Lista de jugadores del equipo seleccionado
+  late Partido partido;
+  List<Jugador> jugadores = [];
 
   @override
   void initState() {
@@ -31,6 +33,21 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
     setState(() {
       jugadores = equipo.jugadores;
     });
+  }
+
+  List<ResultadoPartido> generarHistorial(Equipo equipo) {
+    // Lógica para generar el historial de partidos para el equipo dado.
+    // Puedes obtener esta información desde la base de datos o algún otro origen de datos.
+
+    //generando dato aleatorio
+    return List.generate(
+      5,
+      (index) => ResultadoPartido(
+        gano: index % 3 == 0,
+        golesEquipoLocal: Random().nextInt(4),
+        golesEquipoVisita: Random().nextInt(4),
+      ),
+    );
   }
 
   @override
@@ -81,7 +98,6 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
             fontFamily: 'Urbanist',
             fontSize: 16,
             fontWeight: FontWeight.w900,
-            height: 1.2125,
             color: Color(0xff000000),
           ),
         ),
@@ -102,9 +118,21 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
   }
 
   Widget _buildRecentResults() {
+    // Obtener historiales de partidos para los equipos locales y de visita.
+    final historialLocal = HistorialPartidos(
+      nombreEquipo: partido.local.nombreEquipo,
+      imagenURL: partido.local.imagenURL,
+      resultados: generarHistorial(partido.local),
+    );
+
+    final historialVisita = HistorialPartidos(
+      nombreEquipo: partido.visita.nombreEquipo,
+      imagenURL: partido.visita.imagenURL,
+      resultados: generarHistorial(partido.visita),
+    );
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      //padding: EdgeInsets.fromLTRB(20, 24, 20, 34),
       height: 171,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -131,9 +159,9 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buildTeamResults(),
+                buildTeamResults(historialLocal),
                 SizedBox(width: 125),
-                buildTeamResultsRight(),
+                buildTeamResultsRight(historialVisita),
               ],
             ),
           ),
@@ -142,7 +170,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
     );
   }
 
-  Widget buildTeamResults() {
+  Widget buildTeamResults(HistorialPartidos historial) {
     return Container(
       width: 100,
       child: Column(
@@ -157,7 +185,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
                 Container(
                   margin: EdgeInsets.only(right: 10),
                   child: Text(
-                    partido.local.nombreEquipo.substring(0, 3),
+                    historial.nombreEquipo.substring(0, 3),
                     style: TextStyle(
                       fontFamily: 'Urbanist',
                       fontSize: 16,
@@ -173,7 +201,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
                     borderRadius: BorderRadius.circular(14.5),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(partido.local.imagenURL),
+                      image: NetworkImage(historial.imagenURL),
                     ),
                   ),
                 ),
@@ -188,23 +216,23 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
                   margin: EdgeInsets.only(right: 5),
                   width: 85,
                   child: Stack(
-                    children: List.generate(5, (index) {
+                    children:
+                        List.generate(historial.resultados.length, (index) {
+                      final resultado = historial.resultados[index];
                       return Positioned(
-                        left: 16 *
-                            index
-                                .toDouble(), // Ajusta este valor para el espaciado horizontal
+                        left: 16 * index.toDouble(),
                         child: Container(
                           width: 21,
                           height: 21,
                           decoration: BoxDecoration(
-                            color: index % 2 == 0
-                                ? Color(0xffff0000)
-                                : Color(0xff00d92f),
+                            color: resultado.gano
+                                ? Color(0xff00d92f)
+                                : Color(0xffff0000),
                             borderRadius: BorderRadius.circular(10.5),
                           ),
                           child: Center(
                             child: Text(
-                              index % 2 == 0 ? 'P' : 'G',
+                              resultado.gano ? 'G' : 'P',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: 'Urbanist',
@@ -236,7 +264,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
     );
   }
 
-  Widget buildTeamResultsRight() {
+  Widget buildTeamResultsRight(HistorialPartidos historial) {
     return Container(
       width: 100,
       child: Column(
@@ -251,7 +279,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 5, 10, 0),
                   child: Text(
-                    partido.visita.nombreEquipo.substring(0, 3),
+                    historial.nombreEquipo.substring(0, 3),
                     style: TextStyle(
                       fontFamily: 'Urbanist',
                       fontSize: 16,
@@ -264,7 +292,7 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
                   width: 29,
                   height: 29,
                   child: Image.network(
-                    partido.visita.imagenURL,
+                    historial.imagenURL,
                     width: 29,
                     height: 29,
                   ),
@@ -290,24 +318,24 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
                   width: 85,
                   height: double.infinity,
                   child: Stack(
-                    children: List.generate(5, (index) {
+                    children:
+                        List.generate(historial.resultados.length, (index) {
+                      final resultado = historial.resultados[index];
                       return Positioned(
-                        left: 16 *
-                            index
-                                .toDouble(), // Ajusta este valor para el espaciado horizontal
+                        left: 16 * index.toDouble(),
                         top: 0,
                         child: Container(
                           width: 21,
                           height: 21,
                           decoration: BoxDecoration(
-                            color: index % 2 == 0
-                                ? Color(0xffff0000)
-                                : Color(0xff00d92f),
+                            color: resultado.gano
+                                ? Color(0xff00d92f)
+                                : Color(0xffff0000),
                             borderRadius: BorderRadius.circular(10.5),
                           ),
                           child: Center(
                             child: Text(
-                              index % 2 == 0 ? 'P' : 'G',
+                              resultado.gano ? 'G' : 'P',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: 'Urbanist',

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/pages/add_team_page.dart';
 import 'package:kdksdkskdxd/app/pages/clasificacion_view.dart';
-import 'package:kdksdkskdxd/app/pages/info_partido_view.dart';
 import 'package:kdksdkskdxd/app/pages/partidos_view.dart';
 import 'package:kdksdkskdxd/app/pages/ranking_view.dart';
 
@@ -17,8 +16,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-
     final screens = [
       const MyHomePage(),
       const MyClasificationPage(),

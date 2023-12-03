@@ -12,8 +12,6 @@ class MyClasificationPage extends StatefulWidget {
 }
 
 class _MyClasificationPage extends State<MyClasificationPage> {
-  int _selectedIndexPage = 1;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,31 +26,7 @@ class _MyClasificationPage extends State<MyClasificationPage> {
           ],
         ),
       ),
-      /*
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: _selectedIndexPage,
-        onItemTapped: _onItemTapped,
-      ),
-      */
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndexPage = index;
-      if (index == 0) {
-        Navigator.pushNamed(context, '/');
-      }
-      if (index == 1) {
-        Navigator.pushNamed(context, '/clasificacion');
-      }
-      if (index == 2) {
-        Navigator.pushNamed(context, '/favoritos');
-      }
-      if (index == 3) {
-        Navigator.pushNamed(context, '/ranking');
-      }
-    });
   }
 }
 

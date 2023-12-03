@@ -1,6 +1,4 @@
 import 'package:kdksdkskdxd/entities/equipo.dart';
-import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
-import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class Grupo {
   final List<Equipo> equipos;
@@ -22,7 +20,6 @@ List<Grupo> tusGrupos = [
     id: 1,
     equipos: misEquipos.sublist(11, 13),
   ),
-  // Otros grupos
 ];
 
 // ...

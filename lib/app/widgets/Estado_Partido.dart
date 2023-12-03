@@ -1,138 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kdksdkskdxd/app/pages/info_partido_view.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
 
-import 'dart:async';
-
-class PartidoInfo extends StatefulWidget {
-  final Partido partido;
-
-  PartidoInfo({required this.partido});
-
-  @override
-  _PartidoInfoState createState() => _PartidoInfoState();
-}
-
-class _PartidoInfoState extends State<PartidoInfo> {
-  late bool partidoEnCurso;
-  late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    //widget.partido.live = DateTime.now().isAfter(widget.partido.fecha);
-    _timer = _startTimer();
-  }
-
-  Timer _startTimer() {
-    const oneMinute = Duration(seconds: 5);
-    return Timer.periodic(oneMinute, (timer) {
-      setState(() {
-        widget.partido.live = DateTime.now().isAfter(widget.partido.fecha);
-        Duration tiempoTranscurrido =
-            DateTime.now().difference(widget.partido.fecha);
-        int minutosTranscurridos = tiempoTranscurrido.inMinutes;
-
-        if (minutosTranscurridos >= 50) {
-          widget.partido.live = false;
-          widget.partido.finalizado = true;
-          timer.cancel(); // esto detiene el timer pa evitar los errore
-        }
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super
-        .dispose(); // esto detiene el tiempo al cambiar de page, pa evitar errores
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MyInfoPartidoPage(partido: widget.partido),
-          ),
-        );
-      },
-      child: Container(
-        width: double.infinity,
-        height: 139,
-        decoration: BoxDecoration(
-          border: Border.all(color: Color(0xffcccccc)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildEquipoContainer(widget.partido.local),
-            SizedBox(width: 40.5),
-            _buildEstadoPartido(),
-            SizedBox(width: 40.5),
-            _buildEquipoContainer(widget.partido.visita),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildEstadoPartido() {
-    if (widget.partido.finalizado) {
-      return buildPartidoFinalizado();
-    } else if (widget.partido.live) {
-      return _buildPartidoEnVivo(widget.partido.fecha);
-    } else {
-      return _buildHoraCanchaContainer(
-          widget.partido.fecha, widget.partido.cancha);
-    }
-  }
-
-  Widget _buildEquipoContainer(Equipo equipo) {
-    return Container(
-      //margin: EdgeInsets.only(right: 10),
-      width: 80,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(equipo.imagenURL),
-              ),
-            ),
-          ),
-          SizedBox(height: 5),
-          Text(
-            equipo.nombreEquipo,
-            style: TextStyle(
-              fontFamily: 'Urbanist',
-              fontSize: 10,
-              fontWeight: FontWeight.w400,
-              color: Color(0xff000000),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPartidoEnVivo(DateTime fechaInicio) {
+class PartidoWidgets {
+  static Widget buildPartidoEnVivo(Partido partido) {
+    DateTime fechaInicio = partido.fecha;
     Duration tiempoTranscurrido = DateTime.now().difference(fechaInicio);
     int minutosTranscurridos = tiempoTranscurrido.inMinutes;
 
     int tiempoT = minutosTranscurridos ~/ 25;
-    //int minutosRestantes = minutosTranscurridos % 45;
-
     String tiempo = ' ${tiempoT + 1}T $minutosTranscurridos’';
 
     return Container(
@@ -172,7 +52,7 @@ class _PartidoInfoState extends State<PartidoInfo> {
                   ),
                   child: Center(
                     child: Text(
-                      widget.partido.golesLocal.toString(),
+                      partido.golesLocal.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Urbanist',
@@ -192,7 +72,7 @@ class _PartidoInfoState extends State<PartidoInfo> {
                   ),
                   child: Center(
                     child: Text(
-                      widget.partido.golesVisita.toString(),
+                      partido.golesVisita.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Urbanist',
@@ -211,7 +91,7 @@ class _PartidoInfoState extends State<PartidoInfo> {
     );
   }
 
-  Widget buildPartidoFinalizado() {
+  static Widget buildPartidoFinalizado(Partido partido) {
     return Container(
       width: 100,
       height: double.infinity,
@@ -249,7 +129,7 @@ class _PartidoInfoState extends State<PartidoInfo> {
                   ),
                   child: Center(
                     child: Text(
-                      widget.partido.golesLocal.toString(),
+                      partido.golesLocal.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Urbanist',
@@ -269,7 +149,7 @@ class _PartidoInfoState extends State<PartidoInfo> {
                   ),
                   child: Center(
                     child: Text(
-                      widget.partido.golesVisita.toString(),
+                      partido.golesVisita.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Urbanist',
@@ -288,7 +168,17 @@ class _PartidoInfoState extends State<PartidoInfo> {
     );
   }
 
-  Widget _buildHoraCanchaContainer(DateTime time, String cancha) {
+  Widget _buildEstadoPartido(Partido partido) {
+    if (partido.finalizado) {
+      return buildPartidoFinalizado(partido);
+    } else if (partido.live) {
+      return buildPartidoEnVivo(partido);
+    } else {
+      return buildHoraCanchaContainer(partido.fecha, partido.cancha);
+    }
+  }
+
+  static Widget buildHoraCanchaContainer(DateTime time, String cancha) {
     String formattedTime = DateFormat.Hm().format(time);
 
     return Container(

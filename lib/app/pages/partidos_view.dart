@@ -1,11 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:kdksdkskdxd/app/pages/add_team_page.dart';
-import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
 import 'package:kdksdkskdxd/app/widgets/partido_info.dart';
-import 'package:kdksdkskdxd/entities/equipo.dart';
-import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -18,7 +13,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndexDay = 1;
-  int _selectedIndexPage = 0;
   late DateTime now;
 
   final List<String> months = [

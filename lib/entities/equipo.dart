@@ -36,7 +36,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+10'),
+        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
     jugadores: misJugadores1,
   ),
   Equipo(
@@ -156,7 +156,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+12'),
+        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
     jugadores: [],
   ),
 ];

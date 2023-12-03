@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kdksdkskdxd/app/widgets/BottomNavigationBar.dart';
-import 'package:kdksdkskdxd/entities/equipo.dart';
-import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class MyRankingPage extends StatefulWidget {

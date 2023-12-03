@@ -1,7 +1,4 @@
-import 'package:intl/intl.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
-import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
-import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class Partido {
   final Equipo local;
@@ -56,7 +53,7 @@ List<Partido> misPartidos = [
     visita: misEquipos[5],
     cancha: 'Cancha N°1',
     // hora: "13:00",
-    fecha: DateTime(2023, 12, 3, 0, 6),
+    fecha: DateTime(2023, 12, 3, 14, 52),
     live: false,
     finalizado: false,
     golesLocal: 0,
@@ -100,7 +97,7 @@ List<Partido> misPartidos = [
     visita: misEquipos[12],
     cancha: 'Cancha N°1',
     //  hora: "14:30",
-    fecha: DateTime(2023, 12, 3, 2, 23),
+    fecha: DateTime(2023, 12, 3, 20, 23),
     live: false,
     finalizado: false,
     golesLocal: 0,
@@ -111,7 +108,7 @@ List<Partido> misPartidos = [
     visita: misEquipos[12],
     cancha: 'Cancha N°1',
     //  hora: "14:30",
-    fecha: DateTime(2023, 12, 3, 2, 50),
+    fecha: DateTime(2023, 12, 3, 20, 50),
     live: false,
     finalizado: false,
     golesLocal: 0,
@@ -122,7 +119,7 @@ List<Partido> misPartidos = [
     visita: misEquipos[12],
     cancha: 'Cancha N°1',
     //  hora: "14:30",
-    fecha: DateTime(2023, 12, 3, 2, 11),
+    fecha: DateTime(2023, 12, 3, 20, 11),
     live: false,
     finalizado: false,
     golesLocal: 0,
@@ -133,7 +130,7 @@ List<Partido> misPartidos = [
     visita: misEquipos[12],
     cancha: 'Cancha N°1',
     //  hora: "14:30",
-    fecha: DateTime(2023, 12, 3, 2, 6),
+    fecha: DateTime(2023, 12, 3, 20, 6),
     live: false,
     finalizado: false,
     golesLocal: 0,
