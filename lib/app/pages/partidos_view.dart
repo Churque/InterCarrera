@@ -39,19 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(minutes: 1), (Timer timer) {
+    Timer.periodic(Duration(seconds: 1), (Timer timer) {
       setState(() {
-        // Actualizar la fecha actual
         now = DateTime.now();
       });
     });
-
-    // Obtener la fecha actual al inicio
     now = DateTime.now();
   }
 
   List<Partido> getPartidosFiltrados(String type) {
-    // Filtrar partidos según la fecha actual
+    //filtrar partidos según la fecha
     if (type == 'hoy') {
       return misPartidos
           .where((partido) =>
@@ -114,25 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndexPage = index;
-      if (index == 0) {
-        Navigator.pushNamed(context, '/');
-      }
-      if (index == 1) {
-        // Si se hace clic en "Clasificación", navega a la página de clasificación
-        Navigator.pushNamed(context, '/clasificacion');
-      }
-      if (index == 2) {
-        Navigator.pushNamed(context, '/favoritos');
-      }
-      if (index == 3) {
-        Navigator.pushNamed(context, '/ranking');
-      }
-    });
-  }
-
   DateTime getSelectedDate() {
     if (_selectedIndexDay == 0) {
       return now.subtract(Duration(days: 1));
@@ -146,24 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "InterCarrera",
-          style: TextStyle(fontSize: 16, color: Colors.white),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              // Navegar a la pantalla de añadir equipo
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AnadirEquipo()),
-              );
-            },
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -172,12 +132,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      /*
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: _selectedIndexPage,
-        onItemTapped: _onItemTapped,
-      ),
-      */
     );
   }
 
@@ -193,6 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'Partidos',
               textAlign: TextAlign.center,
               style: TextStyle(
+                fontFamily: 'Urbanist',
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
                 color: Color(0xff000000),
@@ -210,6 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text(
               getFormattedDate(getSelectedDate()),
               style: TextStyle(
+                fontFamily: 'Urbanist',
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 color: Color(0xff000000),
@@ -218,9 +174,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Column(
-          children: getPartidosFiltrados(days[_selectedIndexDay].toLowerCase())
-              .map((partido) => PartidoInfo(partido: partido))
-              .toList(),
+          children: [
+            for (var partido
+                in getPartidosFiltrados(days[_selectedIndexDay].toLowerCase())
+                  ..sort((a, b) => a.fecha.compareTo(b.fecha)))
+              PartidoInfo(partido: partido),
+          ].reversed.toList(),
         ),
       ],
     );
@@ -252,6 +211,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     days[i],
                     style: TextStyle(
+                      fontFamily: 'Urbanist',
                       fontSize: 14,
                     ),
                   ),

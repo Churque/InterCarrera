@@ -13,26 +13,6 @@ class MyRankingPage extends StatefulWidget {
 }
 
 class _MyRankingState extends State<MyRankingPage> {
-  int _selectedIndexPage = 3;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndexPage = index;
-      if (index == 0) {
-        Navigator.pushNamed(context, '/');
-      }
-      if (index == 1) {
-        Navigator.pushNamed(context, '/clasificacion');
-      }
-      if (index == 2) {
-        Navigator.pushNamed(context, '/favoritos');
-      }
-      if (index == 3) {
-        Navigator.pushNamed(context, '/ranking');
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

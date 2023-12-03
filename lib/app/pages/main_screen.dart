@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/app/pages/add_team_page.dart';
 import 'package:kdksdkskdxd/app/pages/clasificacion_view.dart';
 import 'package:kdksdkskdxd/app/pages/info_partido_view.dart';
 import 'package:kdksdkskdxd/app/pages/partidos_view.dart';
@@ -26,6 +27,64 @@ class _MainScreenState extends State<MainScreen> {
     ];
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "InterCarrera",
+          style: TextStyle(fontSize: 16, color: Colors.white),
+        ),
+        actions: [
+          PopupMenuButton<int>(
+            icon: Icon(Icons.menu),
+            offset: Offset(0, 50),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 1,
+                child: Row(
+                  children: [
+                    Icon(Icons.add, color: Colors.black),
+                    SizedBox(width: 8),
+                    Text('Añadir Equipo'),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 2,
+                child: Row(
+                  children: [
+                    Icon(Icons.add, color: Colors.black),
+                    SizedBox(width: 8),
+                    Text('Añadir Partido'),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 3,
+                child: Row(
+                  children: [
+                    Icon(Icons.add, color: Colors.black),
+                    SizedBox(width: 8),
+                    Text('Añadir Jugado'),
+                  ],
+                ),
+              ),
+            ],
+            onSelected: (value) {
+              switch (value) {
+                case 1:
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AnadirEquipo()),
+                  );
+                  break;
+                case 2:
+                  break;
+                case 3:
+                  break;
+              }
+            },
+          ),
+        ],
+      ),
       body: IndexedStack(
         index: selectedIndex,
         children: screens,

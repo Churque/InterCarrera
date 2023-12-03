@@ -17,22 +17,37 @@ class PartidoInfo extends StatefulWidget {
 
 class _PartidoInfoState extends State<PartidoInfo> {
   late bool partidoEnCurso;
+  late Timer _timer;
 
   @override
   void initState() {
     super.initState();
-    partidoEnCurso =
-        widget.partido.live || DateTime.now().isAfter(widget.partido.fecha);
-    _startTimer();
+    //widget.partido.live = DateTime.now().isAfter(widget.partido.fecha);
+    _timer = _startTimer();
   }
 
-  void _startTimer() {
+  Timer _startTimer() {
     const oneMinute = Duration(seconds: 5);
-    Timer.periodic(oneMinute, (timer) {
+    return Timer.periodic(oneMinute, (timer) {
       setState(() {
         widget.partido.live = DateTime.now().isAfter(widget.partido.fecha);
+        Duration tiempoTranscurrido =
+            DateTime.now().difference(widget.partido.fecha);
+        int minutosTranscurridos = tiempoTranscurrido.inMinutes;
+
+        if (minutosTranscurridos >= 50) {
+          widget.partido.live = false;
+          widget.partido.finalizado = true;
+          timer.cancel(); // Detener el temporizador
+        }
       });
     });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -57,10 +72,7 @@ class _PartidoInfoState extends State<PartidoInfo> {
           children: [
             _buildEquipoContainer(widget.partido.local),
             SizedBox(width: 40.5),
-            widget.partido.live
-                ? _buildPartidoEnVivo(widget.partido.fecha)
-                : _buildHoraCanchaContainer(
-                    widget.partido.fecha, widget.partido.cancha),
+            _buildEstadoPartido(),
             SizedBox(width: 40.5),
             _buildEquipoContainer(widget.partido.visita),
           ],
@@ -68,6 +80,19 @@ class _PartidoInfoState extends State<PartidoInfo> {
       ),
     );
   }
+
+  Widget _buildEstadoPartido() {
+    if (widget.partido.finalizado) {
+      return buildPartidoFinalizado();
+    } else if (widget.partido.live) {
+      return _buildPartidoEnVivo(widget.partido.fecha);
+    } else {
+      return _buildHoraCanchaContainer(
+          widget.partido.fecha, widget.partido.cancha);
+    }
+  }
+
+// En el método build
 
   Widget _buildEquipoContainer(Equipo equipo) {
     return Container(
@@ -110,6 +135,7 @@ class _PartidoInfoState extends State<PartidoInfo> {
     //int minutosRestantes = minutosTranscurridos % 45;
 
     String tiempo = ' ${tiempoT + 1}T $minutosTranscurridos’';
+
     return Container(
       width: 100,
       height: double.infinity,
@@ -147,7 +173,7 @@ class _PartidoInfoState extends State<PartidoInfo> {
                   ),
                   child: Center(
                     child: Text(
-                      '0',
+                      widget.partido.golesLocal.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Urbanist',
@@ -167,13 +193,90 @@ class _PartidoInfoState extends State<PartidoInfo> {
                   ),
                   child: Center(
                     child: Text(
-                      '0',
+                      widget.partido.golesVisita.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Urbanist',
                         fontSize: 24,
                         fontWeight: FontWeight.w400,
                         color: Color(0xffffffff),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildPartidoFinalizado() {
+    return Container(
+      width: 100,
+      height: double.infinity,
+      margin: EdgeInsets.only(bottom: 30),
+      decoration: BoxDecoration(
+        color: Color(0xffffffff),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Final',
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              fontFamily: 'Urbanist',
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: Color(0xff000000),
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            width: double.infinity,
+            height: 50,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 45,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Color(0xffd9d9d9),
+                  ),
+                  child: Center(
+                    child: Text(
+                      widget.partido.golesLocal.toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Urbanist',
+                        fontSize: 24,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff000000),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 5),
+                Container(
+                  width: 45,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Color(0xffd9d9d9),
+                  ),
+                  child: Center(
+                    child: Text(
+                      widget.partido.golesVisita.toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Urbanist',
+                        fontSize: 24,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff000000),
                       ),
                     ),
                   ),
