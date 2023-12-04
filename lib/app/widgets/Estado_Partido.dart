@@ -1,9 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:kdksdkskdxd/app/pages/info_partido_view.dart';
-import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
 
 class PartidoWidgets {
@@ -166,16 +162,6 @@ class PartidoWidgets {
         ],
       ),
     );
-  }
-
-  Widget _buildEstadoPartido(Partido partido) {
-    if (partido.finalizado) {
-      return buildPartidoFinalizado(partido);
-    } else if (partido.live) {
-      return buildPartidoEnVivo(partido);
-    } else {
-      return buildHoraCanchaContainer(partido.fecha, partido.cancha);
-    }
   }
 
   static Widget buildHoraCanchaContainer(DateTime time, String cancha) {

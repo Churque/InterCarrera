@@ -37,7 +37,7 @@ List<Equipo> misEquipos = [
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
         EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-    jugadores: misJugadores1,
+    jugadores: misJugadores600,
   ),
   Equipo(
     id: 2,
@@ -47,7 +47,7 @@ List<Equipo> misEquipos = [
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
         EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-    jugadores: misJugadores2,
+    jugadores: misJugadores800,
   ),
   Equipo(
     id: 3,
@@ -57,7 +57,7 @@ List<Equipo> misEquipos = [
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
         EquipoEstadisticas(pts: 7, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-    jugadores: misJugadores3,
+    jugadores: misJugadores100,
   ),
   Equipo(
     id: 4,
@@ -67,7 +67,7 @@ List<Equipo> misEquipos = [
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
         EquipoEstadisticas(pts: 6, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-    jugadores: misJugadores4,
+    jugadores: misJugadores200,
   ),
   Equipo(
     id: 5,
