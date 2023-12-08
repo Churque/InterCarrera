@@ -1,5 +1,6 @@
 import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
+import 'package:kdksdkskdxd/entities/jugador_estadisticas.dart';
 
 class Equipo implements Comparable<Equipo> {
   final int id;
@@ -26,6 +27,12 @@ class Equipo implements Comparable<Equipo> {
 
     return this.estadisticas.difGoles.compareTo(other.estadisticas.difGoles);
   }
+
+  void actualizarEstadisticas(
+      {required int goles, required int golesRecibidos}) {
+    estadisticas.actualizarEstadisticas(
+        goles: goles, golesRecibidos: golesRecibidos);
+  }
 }
 
 List<Equipo> misEquipos = [
@@ -36,8 +43,9 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-    jugadores: misJugadores600,
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
+    //misJugadores600,
+    jugadores: misJugadores.sublist(0, 10),
   ),
   Equipo(
     id: 2,
@@ -46,8 +54,9 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-    jugadores: misJugadores800,
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
+    //misJugadores 800
+    jugadores: misJugadores.sublist(11, 15),
   ),
   Equipo(
     id: 3,
@@ -56,8 +65,9 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 7, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-    jugadores: misJugadores100,
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
+    //misJugadores100
+    jugadores: misJugadores.sublist(16, 20),
   ),
   Equipo(
     id: 4,
@@ -66,8 +76,9 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 6, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
-    jugadores: misJugadores200,
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
+    //misJugadores200
+    jugadores: misJugadores.sublist(21, 25),
   ),
   Equipo(
     id: 5,
@@ -76,7 +87,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 5, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     jugadores: [],
   ),
   Equipo(
@@ -86,7 +97,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 4, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     jugadores: [],
   ),
   Equipo(
@@ -96,7 +107,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 3, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     jugadores: [],
   ),
   Equipo(
@@ -106,7 +117,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 2, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     jugadores: [],
   ),
   Equipo(
@@ -116,7 +127,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 1, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+6'),
     jugadores: [],
   ),
   Equipo(
@@ -126,7 +137,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     jugadores: [],
   ),
   Equipo(
@@ -136,7 +147,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     jugadores: [],
   ),
   Equipo(
@@ -146,7 +157,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     jugadores: [],
   ),
   Equipo(
@@ -156,7 +167,7 @@ List<Equipo> misEquipos = [
     imagenURL:
         'https://assets.stickpng.com/images/584a9b3bb080d7616d298777.png',
     estadisticas:
-        EquipoEstadisticas(pts: 9, pj: 3, pg: 3, pe: 0, pp: 0, difGoles: '+6'),
+        EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     jugadores: [],
   ),
 ];

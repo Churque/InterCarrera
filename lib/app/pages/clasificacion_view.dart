@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/app/appstate.dart';
 import 'package:kdksdkskdxd/app/widgets/equipo_info.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/grupo.dart';
+import 'package:provider/provider.dart';
 
 class MyClasificationPage extends StatefulWidget {
   //const MyClasificationPage({super.key});
@@ -14,6 +16,7 @@ class MyClasificationPage extends StatefulWidget {
 class _MyClasificationPage extends State<MyClasificationPage> {
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -37,6 +40,10 @@ class GrupoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
+    final jugadores = appState.jugadores;
+    final equipos = appState.equipos;
+
     grupo.equipos.sort();
 
     List<Equipo> equiposOrdenados = List.from(grupo.equipos);

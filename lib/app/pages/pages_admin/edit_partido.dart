@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kdksdkskdxd/app/appstate.dart';
 import 'package:kdksdkskdxd/app/widgets/NavBarJugadoresEquipo.dart';
 import 'package:kdksdkskdxd/app/widgets/match_info.dart';
+import 'package:kdksdkskdxd/app/widgets/partido_model.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
+import 'package:provider/provider.dart';
 
 class MyEditPartidoPage extends StatefulWidget {
   const MyEditPartidoPage({required this.partido});
@@ -18,6 +21,7 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
   late Partido partido;
   List<Jugador> jugadores = [];
   Map<String, int> itemCounts = {};
+  late PartidoModel partidoModel;
 
   @override
   void initState() {
@@ -26,6 +30,11 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
     jugadores = partido.local.jugadores;
     itemCounts = Map.fromIterable(jugadores,
         key: (jugador) => _getKey(jugador), value: (_) => 0);
+    partidoModel = Provider.of<PartidoModel>(context, listen: false);
+    for (var jugador in jugadores) {
+      final key = _getKey(jugador);
+      partidoModel.itemCounts.putIfAbsent(key, () => 0);
+    }
   }
 
   String _getKey(Jugador jugador) {
@@ -37,7 +46,7 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
       jugadores = equipo.jugadores;
       for (var jugador in jugadores) {
         final key = _getKey(jugador);
-        itemCounts.putIfAbsent(key, () => 0);
+        itemCounts.putIfAbsent(key, () => partidoModel.itemCounts[key] ?? 0);
       }
     });
   }
@@ -100,21 +109,57 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
   }
 
   Widget buildSaveEditPartido() {
-    return Container(
-      width: double.infinity,
-      height: 55,
-      decoration: BoxDecoration(
-        color: Color(0xff015c1a),
-        borderRadius: BorderRadius.circular(52),
-      ),
-      child: Center(
-        child: Text(
-          'Actualizar  Partido',
-          style: TextStyle(
-            fontFamily: 'Urbanist',
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: Color(0xffffffff),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          //actualizar estadísticas de equipos
+          widget.partido.local.actualizarEstadisticas(
+            goles: widget.partido.golesLocal,
+            golesRecibidos: widget.partido.golesVisita,
+          );
+
+          widget.partido.visita.estadisticas.actualizarEstadisticas(
+            goles: widget.partido.golesVisita,
+            golesRecibidos: widget.partido.golesLocal,
+          );
+
+          //actualizar estadísticas de jugadores de ekipo visita
+          /*for (var jugador in widget.partido.visita.jugadores) {
+            final key = _getKey(jugador);
+            final golesJugadorVisita = itemCounts[key] ?? 0;
+            jugador.actualizarEstadisticas(
+              goles: golesJugadorVisita,
+              asistencias: itemCounts[key] ?? 0,
+            );
+          }
+*/
+          Provider.of<AppState>(context, listen: false)
+              .updateEquipos(misEquipos);
+
+          Provider.of<AppState>(context, listen: false)
+              .updateJugadores(misJugadores);
+
+          // Guardar cambios y salir
+          // saveCounters();
+          Navigator.pop(context);
+        });
+      },
+      child: Container(
+        width: double.infinity,
+        height: 55,
+        decoration: BoxDecoration(
+          color: Color(0xff015c1a),
+          borderRadius: BorderRadius.circular(52),
+        ),
+        child: Center(
+          child: Text(
+            'Actualizar Partido',
+            style: TextStyle(
+              fontFamily: 'Urbanist',
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: Color(0xffffffff),
+            ),
           ),
         ),
       ),
@@ -153,7 +198,7 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
               ),
             ),
           ),
-          SizedBox(width: 20), // Espaciado entre los containers
+          SizedBox(width: 20),
           Container(
             width: 163,
             height: double.infinity,
@@ -257,7 +302,7 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
   Widget buildCounterRow(int index) {
     final jugador = jugadores[index];
     final key = _getKey(jugador);
-    final itemCount = itemCounts[key];
+    int itemCount = partidoModel.itemCounts[key] ?? 0;
 
     return Container(
       margin: EdgeInsets.only(right: 5),
@@ -267,9 +312,10 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
           InkWell(
             onTap: () {
               setState(() {
-                if (itemCounts[key]! > 0) {
-                  itemCounts[key] = itemCounts[key]! - 1;
-                  partido.actualizarGolesEquipo(jugadores[index].equipoID, -1);
+                if (itemCount > 0) {
+                  partidoModel.updateItemCount(key, itemCount - 1);
+                  partido.actualizarGolesEquipo(jugador.equipoID, -1);
+                  jugador.estadisticas.actualizarGoles(goles: -1);
                 }
               });
             },
@@ -307,8 +353,9 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
           InkWell(
             onTap: () {
               setState(() {
-                itemCounts[key] = itemCounts[key]! + 1;
-                partido.actualizarGolesEquipo(jugadores[index].equipoID, 1);
+                partidoModel.updateItemCount(key, itemCount + 1);
+                partido.actualizarGolesEquipo(jugador.equipoID, 1);
+                jugador.estadisticas.actualizarGoles(goles: 1);
               });
             },
             child: Container(
