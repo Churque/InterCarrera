@@ -15,7 +15,7 @@ class JugadorEstadisticas {
 
   void actualizarasistencias({required int asistencias}) {
     print("Actualizando estadísticas: asistencias=$asistencias");
-    this.asistencias = asistencias;
+    this.asistencias += asistencias;
     print("Nuevas estadísticas: asistencias=${this.asistencias}");
   }
 }

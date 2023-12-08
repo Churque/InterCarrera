@@ -36,10 +36,9 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
   }
 
   List<ResultadoPartido> generarHistorial(Equipo equipo) {
-    // Lógica para generar el historial de partidos para el equipo dado.
-    // Puedes obtener esta información desde la base de datos o algún otro origen de datos.
+    //aki poner un algoritmo pa los ultimos 5 partidos
 
-    //generando dato aleatorio
+    //generar datos aleatorio
     return List.generate(
       5,
       (index) => ResultadoPartido(
@@ -118,7 +117,6 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
   }
 
   Widget _buildRecentResults() {
-    // Obtener historiales de partidos para los equipos locales y de visita.
     final historialLocal = HistorialPartidos(
       nombreEquipo: partido.local.nombreEquipo,
       imagenURL: partido.local.imagenURL,

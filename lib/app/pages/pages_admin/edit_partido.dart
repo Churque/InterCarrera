@@ -20,20 +20,28 @@ class MyEditPartidoPage extends StatefulWidget {
 class _MyEditPartidoPage extends State<MyEditPartidoPage> {
   late Partido partido;
   List<Jugador> jugadores = [];
-  Map<String, int> itemCounts = {};
+
+  Map<String, int> golesCounts = {};
+  Map<String, int> asistenciasCounts = {};
   late PartidoModel partidoModel;
+  bool isAgregarGolClicked = true;
+  bool isAgregarAsistenciaClicked = false;
 
   @override
   void initState() {
     super.initState();
     partido = widget.partido;
     jugadores = partido.local.jugadores;
-    itemCounts = Map.fromIterable(jugadores,
+    golesCounts = Map.fromIterable(jugadores,
+        key: (jugador) => _getKey(jugador), value: (_) => 0);
+    asistenciasCounts = Map.fromIterable(jugadores,
         key: (jugador) => _getKey(jugador), value: (_) => 0);
     partidoModel = Provider.of<PartidoModel>(context, listen: false);
     for (var jugador in jugadores) {
       final key = _getKey(jugador);
-      partidoModel.itemCounts.putIfAbsent(key, () => 0);
+
+      partidoModel.golesCounts.putIfAbsent(key, () => 0);
+      partidoModel.asistenciasCounts.putIfAbsent(key, () => 0);
     }
   }
 
@@ -46,7 +54,9 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
       jugadores = equipo.jugadores;
       for (var jugador in jugadores) {
         final key = _getKey(jugador);
-        itemCounts.putIfAbsent(key, () => partidoModel.itemCounts[key] ?? 0);
+        asistenciasCounts.putIfAbsent(
+            key, () => partidoModel.asistenciasCounts[key] ?? 0);
+        golesCounts.putIfAbsent(key, () => partidoModel.golesCounts[key] ?? 0);
       }
     });
   }
@@ -178,43 +188,64 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: 163,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              color: Color(0xff015c1a),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Center(
-              child: Text(
-                'Agregar gol',
-                style: TextStyle(
-                  fontFamily: 'Urbanist',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  height: 1.5,
-                  color: Color(0xffffffff),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isAgregarGolClicked = true;
+                isAgregarAsistenciaClicked = false;
+              });
+            },
+            child: Container(
+              width: 163,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color:
+                    isAgregarGolClicked ? Color(0xff015c1a) : Color(0xffd9d9d9),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Center(
+                child: Text(
+                  'Agregar gol',
+                  style: TextStyle(
+                    fontFamily: 'Urbanist',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: isAgregarGolClicked
+                        ? Color(0xffffffff)
+                        : Color(0xff000000),
+                  ),
                 ),
               ),
             ),
           ),
           SizedBox(width: 20),
-          Container(
-            width: 163,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              color: Color(0xffd9d9d9),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Center(
-              child: Text(
-                'Agregar Asistencia',
-                style: TextStyle(
-                  fontFamily: 'Urbanist',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  height: 1.5,
-                  color: Color(0xff000000),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isAgregarAsistenciaClicked = true;
+                isAgregarGolClicked = false;
+              });
+            },
+            child: Container(
+              width: 163,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: isAgregarAsistenciaClicked
+                    ? Color(0xff015c1a)
+                    : Color(0xffd9d9d9),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Center(
+                child: Text(
+                  'Agregar Asistencia',
+                  style: TextStyle(
+                    fontFamily: 'Urbanist',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: isAgregarAsistenciaClicked
+                        ? Color(0xffffffff)
+                        : Color(0xff000000),
+                  ),
                 ),
               ),
             ),
@@ -265,8 +296,7 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
                     jugador.imagenURL,
                     width: 42,
                     height: 42,
-                    fit: BoxFit
-                        .cover, // Puedes ajustar esto según tus necesidades
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Text(
@@ -302,8 +332,8 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
   Widget buildCounterRow(int index) {
     final jugador = jugadores[index];
     final key = _getKey(jugador);
-    int itemCount = partidoModel.itemCounts[key] ?? 0;
-
+    int golesCounts = partidoModel.golesCounts[key] ?? 0;
+    int asistenciasCounts = partidoModel.asistenciasCounts[key] ?? 0;
     return Container(
       margin: EdgeInsets.only(right: 5),
       child: Row(
@@ -312,10 +342,19 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
           InkWell(
             onTap: () {
               setState(() {
-                if (itemCount > 0) {
-                  partidoModel.updateItemCount(key, itemCount - 1);
-                  partido.actualizarGolesEquipo(jugador.equipoID, -1);
-                  jugador.estadisticas.actualizarGoles(goles: -1);
+                if ((isAgregarGolClicked && golesCounts > 0) ||
+                    (!isAgregarGolClicked && asistenciasCounts > 0)) {
+                  if (isAgregarGolClicked) {
+                    //actualizar los gole
+                    partido.actualizarGolesEquipo(jugador.equipoID, -1);
+                    partidoModel.updateGolesCount(key, golesCounts - 1);
+                    jugador.estadisticas.actualizarGoles(goles: -1);
+                  } else {
+                    //actualizar las asistencia
+                    partidoModel.updateAsistenciasCount(
+                        key, asistenciasCounts - 1);
+                    jugador.estadisticas.actualizarasistencias(asistencias: -1);
+                  }
                 }
               });
             },
@@ -340,7 +379,7 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
           ),
           SizedBox(width: 10),
           Text(
-            '$itemCount',
+            isAgregarGolClicked ? '$golesCounts' : '$asistenciasCounts',
             style: TextStyle(
               fontFamily: 'Poppins',
               fontSize: 16,
@@ -353,9 +392,15 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
           InkWell(
             onTap: () {
               setState(() {
-                partidoModel.updateItemCount(key, itemCount + 1);
-                partido.actualizarGolesEquipo(jugador.equipoID, 1);
-                jugador.estadisticas.actualizarGoles(goles: 1);
+                if (isAgregarGolClicked) {
+                  partido.actualizarGolesEquipo(jugador.equipoID, 1);
+                  partidoModel.updateGolesCount(key, golesCounts + 1);
+                  jugador.estadisticas.actualizarGoles(goles: 1);
+                } else {
+                  partidoModel.updateAsistenciasCount(
+                      key, asistenciasCounts + 1);
+                  jugador.estadisticas.actualizarasistencias(asistencias: 1);
+                }
               });
             },
             child: Container(
