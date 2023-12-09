@@ -69,7 +69,6 @@ class GrupoInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 30),
       width: double.infinity,
       height: 37,
       decoration: BoxDecoration(
@@ -77,107 +76,47 @@ class GrupoInfoWidget extends StatelessWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 101, 0),
-            child: Text(
-              groupName,
-              style: TextStyle(
-                fontFamily: 'Urbanist',
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
-                height: 1.5,
-                color: Colors.white,
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.fromLTRB(44, 0, 0, 0),
+              child: Text(
+                groupName,
+                style: TextStyle(
+                  fontFamily: 'Urbanist',
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                  height: 1.5,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
-          Container(
-            child: Row(
-              children: [
-                Container(
-                  child: Text(
-                    'PTS',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(left: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  for (dynamic stat in ['PTS', 'PJ', 'PG', 'PE', 'PP', 'DG'])
+                    Expanded(
+                      child: Container(
+                        child: Text(
+                          stat,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  margin: EdgeInsets.only(
-                    right: 0,
-                  ),
-                  child: Text(
-                    'PJ',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  margin: EdgeInsets.only(
-                    right: 0,
-                  ),
-                  child: Text(
-                    'PG',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  margin: EdgeInsets.only(
-                    right: 0,
-                  ),
-                  child: Text(
-                    'PE',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 14),
-                Container(
-                  margin: EdgeInsets.only(
-                    right: 0,
-                  ),
-                  child: Text(
-                    'PP',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Container(
-                  margin: EdgeInsets.only(
-                    left: 0,
-                  ),
-                  child: Text(
-                    'DG',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
