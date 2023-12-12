@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
               partido.fecha.month == yesterday.month &&
               partido.fecha.year == yesterday.year)
           .toList();
-    } else if (type == 'manana') {
+    } else if (type == 'mañana') {
       final tomorrow = now.add(Duration(days: 1));
       return misPartidos
           .where((partido) =>

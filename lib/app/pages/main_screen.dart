@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/pages/add_team_page.dart';
 import 'package:kdksdkskdxd/app/pages/clasificacion_view.dart';
+import 'package:kdksdkskdxd/app/pages/pages_admin/add_partido.dart';
 import 'package:kdksdkskdxd/app/pages/pages_admin/edit_partido.dart';
 import 'package:kdksdkskdxd/app/pages/partidos_view.dart';
 import 'package:kdksdkskdxd/app/pages/ranking_view.dart';
@@ -75,6 +76,10 @@ class _MainScreenState extends State<MainScreen> {
                   );
                   break;
                 case 2:
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyAddPartidoPage()),
+                  );
                   break;
                 case 3:
                   break;

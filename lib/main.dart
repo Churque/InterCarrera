@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:kdksdkskdxd/app/widgets/partido_model.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,19 +25,23 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "asdasd",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+    return Localizations(
+      locale: const Locale('es', ''),
+      delegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      child: MaterialApp(
+        title: "asdasd",
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        ),
+        home: const MainScreen(),
       ),
-      home: const MainScreen(),
-
-      //initialRoute: '/',
-      //routes: routes,
     );
   }
 }
