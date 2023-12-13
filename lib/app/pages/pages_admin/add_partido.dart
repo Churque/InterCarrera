@@ -126,7 +126,7 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
   Widget buildCancelarPartido() {
     return GestureDetector(
       onTap: () {
-        print('Volver');
+        Navigator.pop(context);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
@@ -193,6 +193,7 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
         );
 
         misPartidos.add(nuevoPartido);
+        Navigator.pop(context);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
@@ -237,10 +238,10 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
       },
       child: index == -10
           ? selectedEquipoLocal != null
-              ? buildEquipoSeleccionado(selectedEquipoLocal!)
+              ? buildEquipoSeleccionado(selectedEquipoLocal!, false)
               : buildButtonTeams(buttonText)
           : selectedEquipoVisita != null
-              ? buildEquipoSeleccionado(selectedEquipoVisita!)
+              ? buildEquipoSeleccionado(selectedEquipoVisita!, true)
               : buildButtonTeams(buttonText),
     );
   }
@@ -275,38 +276,65 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
     );
   }
 
-  Widget buildEquipoSeleccionado(Equipo equipo) {
+  Widget buildEquipoSeleccionado(Equipo equipo, bool esVisita) {
     return Container(
       width: 155,
       height: 30,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(equipo.imagenURL),
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 9),
-            child: Text(
-              equipo.nombreEquipo,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                height: 1.5,
-                color: Color(0xff000000),
-              ),
-            ),
-          ),
-        ],
+        children: esVisita
+            ? [
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(equipo.imagenURL),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 9),
+                  child: Text(
+                    equipo.nombreEquipo,
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      height: 1.5,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ),
+              ]
+            : [
+                Container(
+                  margin: EdgeInsets.only(right: 9),
+                  child: Text(
+                    equipo.nombreEquipo,
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      height: 1.5,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(equipo.imagenURL),
+                    ),
+                  ),
+                ),
+              ],
       ),
     );
   }
