@@ -19,6 +19,7 @@ class _AnadirEquipoState extends State<AnadirEquipo> {
   void _anadirEquipo() async {
     // Obtén los valores ingresados por el usuario
     String nombreEquipo = _nombreController.text;
+    String urlEquipo = _nombreController.text;
     // Obtén otros valores según sea necesario
 
     // Validación simple (puedes agregar validaciones más robustas según tus requisitos)
@@ -83,7 +84,7 @@ class _AnadirEquipoState extends State<AnadirEquipo> {
       // Muestra un mensaje de error si el nombre del equipo está vacío
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Por favor, ingrese el nombre del equipo'),
+          content: Text('Por favor, ingrese los datos del equipo'),
         ),
       );
     }
@@ -103,6 +104,10 @@ class _AnadirEquipoState extends State<AnadirEquipo> {
             TextField(
               controller: _nombreController,
               decoration: InputDecoration(labelText: 'Nombre del equipo'),
+            ),
+            TextField(
+              controller: _nombreController,
+              decoration: InputDecoration(labelText: 'URL de la imagen'),
             ),
             // Agrega otros campos según sea necesario
 

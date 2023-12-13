@@ -16,57 +16,29 @@ class Grupo {
   });
 }
 
-class TuWidget extends StatefulWidget {
-  @override
-  _TuWidgetState createState() => _TuWidgetState();
-}
+Future<List<Grupo>> obtenerGrupos() async {
+  try {
+    List<Equipo> equipos = await equiposService.obtenerEquipos();
 
-class _TuWidgetState extends State<TuWidget> {
-  late List<Grupo> tusGrupos;
+    int equiposPorGrupo = 4;
+    int totalEquipos = equipos.length;
+    int totalGrupos = (totalEquipos / equiposPorGrupo).ceil();
 
-  @override
-  void initState() {
-    super.initState();
-    inicializarGrupos();
-  }
-
-  Future<void> inicializarGrupos() async {
-    try {
-      List<Equipo> equipos = await equiposService.obtenerEquipos();
-
-      setState(() {
-        tusGrupos = [
-          Grupo(nombre: 'GRUPO A', id: 1, equipos: equipos),
-          Grupo(nombre: 'GRUPO B', id: 1, equipos: equipos.sublist(5, 10)),
-          Grupo(nombre: 'GRUPO C', id: 1, equipos: equipos.sublist(11, 13)),
-        ];
-      });
-    } catch (e) {
-      // Maneja los errores según sea necesario
-      print('Error al inicializar grupos: $e');
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (tusGrupos == null) {
-      return CircularProgressIndicator();
+    List<Grupo> tusGrupos = [];
+    for (int i = 0; i < totalGrupos; i++) {
+      int startIndex = i * equiposPorGrupo;
+      int endIndex = (i + 1) * equiposPorGrupo;
+      tusGrupos.add(Grupo(
+        nombre: 'GRUPO ${String.fromCharCode(65 + i)}',
+        id: i + 1,
+        equipos: equipos.sublist(startIndex, endIndex.clamp(0, totalEquipos)),
+      ));
     }
 
-    // Ahora puedes usar tusGrupos en tu interfaz de usuario
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tus Grupos'),
-      ),
-      body: ListView.builder(
-        itemCount: tusGrupos.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(tusGrupos[index].nombre),
-            // Otras propiedades del grupo según tus necesidades
-          );
-        },
-      ),
-    );
+    return tusGrupos;
+  } catch (e) {
+    // Maneja los errores según sea necesario
+    print('Error al obtener grupos: $e');
+    throw e; // Puedes decidir si lanzar el error o manejarlo de alguna otra manera
   }
 }
