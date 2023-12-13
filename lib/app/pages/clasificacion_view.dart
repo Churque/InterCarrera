@@ -10,8 +10,8 @@ class MyClasificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<Grupo>>(
-        future: obtenerGrupos(),
+      body: StreamBuilder<List<Grupo>>(
+        stream: obtenerGrupos(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();

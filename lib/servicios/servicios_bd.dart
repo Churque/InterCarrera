@@ -7,20 +7,13 @@ class EquiposService {
   final CollectionReference equiposCollection =
       FirebaseFirestore.instance.collection('equipos');
 
-  Future<List<Equipo>> obtenerEquipos() async {
-    try {
-      QuerySnapshot querySnapshot = await equiposCollection.get();
-
-      List<Equipo> equipos =
-          querySnapshot.docs.map((doc) => _convertirEquipo(doc)).toList();
-
-      return equipos;
-    } catch (e) {
-      throw Exception('Error al obtener la colección de equipos: $e');
-    }
+  Stream<List<Equipo>> obtenerEquipos() {
+    return equiposCollection.snapshots().map((querySnapshot) {
+      return querySnapshot.docs.map((doc) => convertirEquipo(doc)).toList();
+    });
   }
 
-  Equipo _convertirEquipo(DocumentSnapshot snapshot) {
+  Equipo convertirEquipo(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
 
     // Asegúrate de manejar correctamente el caso en que 'estadisticas' o 'jugadores' puedan ser nulos

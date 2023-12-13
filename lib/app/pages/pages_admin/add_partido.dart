@@ -47,12 +47,13 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
     super.dispose();
   }
 
-  Future<List<Equipo>> get equiposDisponibles async {
-    misEquipos = await equiposService.obtenerEquipos();
-    return misEquipos
-        .where((equipo) =>
-            equipo != selectedEquipoLocal && equipo != selectedEquipoVisita)
-        .toList();
+  Stream<List<Equipo>> get equiposDisponibles {
+    return equiposService.obtenerEquipos().map((equipos) {
+      return equipos
+          .where((equipo) =>
+              equipo != selectedEquipoLocal && equipo != selectedEquipoVisita)
+          .toList();
+    });
   }
 
   @override
@@ -370,8 +371,8 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
             width: 2.0,
           ), // Añadir borde negro
         ),
-        child: FutureBuilder<List<Widget>>(
-          future: buildEquipoSelectList(),
+        child: StreamBuilder<List<Widget>>(
+          stream: buildEquipoSelectList(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
@@ -396,16 +397,16 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
     );
   }
 
-  Future<List<Widget>> buildEquipoSelectList() async {
-    List<Widget> equipoSelectWidgets = [];
+  Stream<List<Widget>> buildEquipoSelectList() {
+    return equiposService.obtenerEquipos().map((equiposDisponibles) {
+      List<Widget> equipoSelectWidgets = [];
 
-    List<Equipo> equiposDisponibles = await equiposService.obtenerEquipos();
+      for (int i = 0; i < equiposDisponibles.length; i++) {
+        equipoSelectWidgets.add(buildEquipoSelect(i, equiposDisponibles[i]));
+      }
 
-    for (int i = 0; i < equiposDisponibles.length; i++) {
-      equipoSelectWidgets.add(buildEquipoSelect(i, equiposDisponibles[i]));
-    }
-
-    return equipoSelectWidgets;
+      return equipoSelectWidgets;
+    });
   }
 
   Widget buildEquipoSelect(int equipoIndex, Equipo equipo) {
