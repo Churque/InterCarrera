@@ -3,6 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
+import 'package:kdksdkskdxd/servicios/servicios_bd.dart';
+
+final EquiposService equiposService = EquiposService();
 
 class MyAddPartidoPage extends StatefulWidget {
   const MyAddPartidoPage();
@@ -44,7 +47,8 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
     super.dispose();
   }
 
-  List<Equipo> get equiposDisponibles {
+  Future<List<Equipo>> get equiposDisponibles async {
+    misEquipos = await equiposService.obtenerEquipos();
     return misEquipos
         .where((equipo) =>
             equipo != selectedEquipoLocal && equipo != selectedEquipoVisita)
@@ -366,17 +370,36 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
             width: 2.0,
           ), // Añadir borde negro
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: buildEquipoSelectList(),
-          ),
+        child: FutureBuilder<List<Widget>>(
+          future: buildEquipoSelectList(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Center(
+                child: CircularProgressIndicator(
+                  value:
+                      null, // Establecer el valor como null para que sea más pequeño
+                ),
+              );
+            } else {
+              List<Widget> equipoSelectWidgets = snapshot.data ?? [];
+              return SingleChildScrollView(
+                child: Column(
+                  children: equipoSelectWidgets,
+                ),
+              );
+            }
+          },
         ),
       ),
     );
   }
 
-  List<Widget> buildEquipoSelectList() {
+  Future<List<Widget>> buildEquipoSelectList() async {
     List<Widget> equipoSelectWidgets = [];
+
+    List<Equipo> equiposDisponibles = await equiposService.obtenerEquipos();
 
     for (int i = 0; i < equiposDisponibles.length; i++) {
       equipoSelectWidgets.add(buildEquipoSelect(i, equiposDisponibles[i]));

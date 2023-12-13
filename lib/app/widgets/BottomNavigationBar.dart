@@ -41,17 +41,17 @@ class CustomBottomNavigationBar extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.star,
-              size: 20,
-            ),
-            label: 'Favoritos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.bar_chart,
               size: 20,
             ),
             label: 'Ranking',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.star,
+              size: 20,
+            ),
+            label: 'Favoritos',
           ),
         ],
         type: BottomNavigationBarType.fixed,

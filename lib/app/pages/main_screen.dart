@@ -61,7 +61,7 @@ class _MainScreenState extends State<MainScreen> {
                   children: [
                     Icon(Icons.add, color: Colors.black),
                     SizedBox(width: 8),
-                    Text('Añadir Jugado'),
+                    Text('Añadir Jugador'),
                   ],
                 ),
               ),
@@ -120,17 +120,17 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.star,
-              size: 20,
-            ),
-            label: 'Favoritos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.bar_chart,
               size: 20,
             ),
             label: 'Ranking',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.star,
+              size: 20,
+            ),
+            label: 'Favoritos',
           ),
         ],
       ),
