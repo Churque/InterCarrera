@@ -349,7 +349,7 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
       left: leftPosition,
       top: 158,
       child: Container(
-        padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+        padding: EdgeInsets.symmetric(vertical: 15),
         width: 170,
         height: 284,
         decoration: BoxDecoration(
@@ -386,7 +386,7 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
   }
 
   Widget buildEquipoSelect(int equipoIndex, Equipo equipo) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         setState(() {
           if (selectedTeamIndex == -10) {
@@ -421,7 +421,7 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
               equipo.nombreEquipo,
               style: TextStyle(
                 fontFamily: 'Poppins',
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
                 height: 1.5,
                 color: Color(0xff000000),

@@ -12,11 +12,13 @@ class HistorialPartidos {
 
 class ResultadoPartido {
   final bool gano;
+  final bool empate;
   final int golesEquipoLocal;
   final int golesEquipoVisita;
 
   ResultadoPartido({
     required this.gano,
+    required this.empate,
     required this.golesEquipoLocal,
     required this.golesEquipoVisita,
   });
