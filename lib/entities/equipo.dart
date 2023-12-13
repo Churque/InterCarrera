@@ -1,6 +1,5 @@
 import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
-import 'package:kdksdkskdxd/entities/jugador_estadisticas.dart';
 
 class Equipo implements Comparable<Equipo> {
   final int id;

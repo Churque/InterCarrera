@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/jugador_estadisticas.dart';
 
