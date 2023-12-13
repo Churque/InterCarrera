@@ -5,10 +5,10 @@ import 'package:kdksdkskdxd/entities/jugador_estadisticas.dart';
 class Equipo implements Comparable<Equipo> {
   int id;
   int posicion;
-  final String nombreEquipo;
-  final String imagenURL;
-  final EquipoEstadisticas estadisticas;
-  final List<Jugador> jugadores;
+  String nombreEquipo;
+  String imagenURL;
+  EquipoEstadisticas estadisticas;
+  List<Jugador> jugadores;
 
   Equipo({
     required this.id,
@@ -45,7 +45,7 @@ List<Equipo> misEquipos = [
     estadisticas:
         EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     //misJugadores600,
-    jugadores: misJugadores.sublist(0, 10),
+    jugadores: [],
   ),
   Equipo(
     id: 2,
@@ -56,7 +56,7 @@ List<Equipo> misEquipos = [
     estadisticas:
         EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     //misJugadores 800
-    jugadores: misJugadores.sublist(11, 15),
+    jugadores: [],
   ),
   Equipo(
     id: 3,
@@ -67,7 +67,7 @@ List<Equipo> misEquipos = [
     estadisticas:
         EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     //misJugadores100
-    jugadores: misJugadores.sublist(16, 20),
+    jugadores: [],
   ),
   Equipo(
     id: 4,
@@ -78,7 +78,7 @@ List<Equipo> misEquipos = [
     estadisticas:
         EquipoEstadisticas(pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, difGoles: '+0'),
     //misJugadores200
-    jugadores: misJugadores.sublist(21, 25),
+    jugadores: [],
   ),
   Equipo(
     id: 5,

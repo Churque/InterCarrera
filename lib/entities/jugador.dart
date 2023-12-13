@@ -33,6 +33,13 @@ class Jugador {
   factory Jugador.fromMap(Map<String, dynamic> map) {
     return Jugador(
       id: map['id'],
+      nombre: map['nombre'],
+      equipoID: map['equipoID'],
+      numCamiseta: map['numCamiseta'],
+      imagenURL: map['imagenURL'],
+      estadisticas: JugadorEstadisticas.fromMap(map['estadisticas']),
+    );
+  }
 }
 
 List<Jugador> obtenerTopGoleadores(List<Jugador> jugadores, int cantidad) {
