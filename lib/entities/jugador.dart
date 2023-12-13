@@ -30,6 +30,7 @@ class Jugador {
     return encontrado;
   }
 
+  factory Jugador.fromMap(Map<String, dynamic> map) {
     return Jugador(
       id: map['id'],
 }
