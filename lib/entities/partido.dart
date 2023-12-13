@@ -1,7 +1,7 @@
 import 'package:kdksdkskdxd/entities/equipo.dart';
 
 class Partido {
-  final int id;
+  final String id;
   final Equipo local;
   final Equipo visita;
   final String cancha;
@@ -33,6 +33,19 @@ class Partido {
     }
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'local': local.toMap(), // Asegúrate de que Equipo tenga un método toMap
+      'visita': visita.toMap(),
+      'cancha': cancha,
+      'fecha': fecha,
+      'live': live,
+      'finalizado': finalizado,
+      'golesLocal': golesLocal,
+      'golesVisita': golesVisita,
+    };
+  }
+
   @override
   String toString() {
     return 'Partido(id: $id, local: ${local.nombreEquipo}, visita: ${visita.nombreEquipo}, cancha: $cancha, fecha: $fecha, '
@@ -42,7 +55,7 @@ class Partido {
 
 List<Partido> misPartidos = [
   Partido(
-    id: 1,
+    id: '1',
     local: misEquipos[0],
     visita: misEquipos[1],
     cancha: 'Cancha N°1',
@@ -55,7 +68,7 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    id: 2,
+    id: '2',
     local: misEquipos[2],
     visita: misEquipos[3],
     cancha: 'Cancha N°1',
@@ -67,7 +80,7 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    id: 3,
+    id: '3',
     local: misEquipos[4],
     visita: misEquipos[5],
     cancha: 'Cancha N°1',
@@ -79,7 +92,7 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    id: 4,
+    id: '4',
     local: misEquipos[6],
     visita: misEquipos[7],
     cancha: 'Cancha N°1',
@@ -91,7 +104,7 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    id: 5,
+    id: '5',
     local: misEquipos[7],
     visita: misEquipos[8],
     cancha: 'Cancha N°1',
@@ -103,7 +116,7 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    id: 6,
+    id: '6',
     local: misEquipos[9],
     visita: misEquipos[10],
     cancha: 'Cancha N°1',
@@ -115,7 +128,7 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    id: 7,
+    id: '7',
     local: misEquipos[11],
     visita: misEquipos[12],
     cancha: 'Cancha N°1',
@@ -127,7 +140,7 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    id: 8,
+    id: '8',
     local: misEquipos[11],
     visita: misEquipos[12],
     cancha: 'Cancha N°1',
@@ -139,7 +152,7 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    id: 9,
+    id: '9',
     local: misEquipos[11],
     visita: misEquipos[12],
     cancha: 'Cancha N°1',
@@ -151,7 +164,7 @@ List<Partido> misPartidos = [
     golesVisita: 0,
   ),
   Partido(
-    id: 10,
+    id: '10',
     local: misEquipos[11],
     visita: misEquipos[12],
     cancha: 'Cancha N°1',

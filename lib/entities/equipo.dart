@@ -32,6 +32,31 @@ class Equipo implements Comparable<Equipo> {
     estadisticas.actualizarEstadisticas(
         goles: goles, golesRecibidos: golesRecibidos);
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'posicion': posicion,
+      'nombreEquipo': nombreEquipo,
+      'imagenURL': imagenURL,
+      'estadisticas': estadisticas.toMap(),
+      'jugadores': jugadores.map((jugador) => jugador.toMap()).toList(),
+    };
+  }
+
+  // Método para crear una instancia de Equipo desde un mapa
+  factory Equipo.fromMap(Map<String, dynamic> map) {
+    return Equipo(
+      id: map['id'],
+      posicion: map['posicion'],
+      nombreEquipo: map['nombreEquipo'],
+      imagenURL: map['imagenURL'],
+      estadisticas: EquipoEstadisticas.fromMap(map['estadisticas']),
+      jugadores: List<Jugador>.from(
+        map['jugadores'].map((j) => Jugador.fromMap(j)),
+      ),
+    );
+  }
 }
 
 List<Equipo> misEquipos = [

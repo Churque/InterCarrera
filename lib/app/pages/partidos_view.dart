@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/widgets/partido_info.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
+import 'package:kdksdkskdxd/servicios/servicios_bd.dart';
+
+final EquiposService equiposService = EquiposService();
 
 class MyHomePage extends StatefulWidget {
   //const MyHomePage();
@@ -41,33 +44,38 @@ class _MyHomePageState extends State<MyHomePage> {
     now = DateTime.now();
   }
 
-  List<Partido> getPartidosFiltrados(String type) {
-    //filtrar partidos según la fecha
-    if (type == 'hoy') {
-      return misPartidos
-          .where((partido) =>
-              partido.fecha.day == now.day &&
-              partido.fecha.month == now.month &&
-              partido.fecha.year == now.year)
-          .toList();
-    } else if (type == 'ayer') {
-      final yesterday = now.subtract(Duration(days: 1));
-      return misPartidos
-          .where((partido) =>
-              partido.fecha.day == yesterday.day &&
-              partido.fecha.month == yesterday.month &&
-              partido.fecha.year == yesterday.year)
-          .toList();
-    } else if (type == 'mañana') {
-      final tomorrow = now.add(Duration(days: 1));
-      return misPartidos
-          .where((partido) =>
-              partido.fecha.day == tomorrow.day &&
-              partido.fecha.month == tomorrow.month &&
-              partido.fecha.year == tomorrow.year)
-          .toList();
+  Stream<List<Partido>> getPartidosFiltrados(String type) async* {
+    Stream<List<Partido>> misPartidosStream = equiposService.obtenerPartidos();
+
+    await for (List<Partido> misPartidos in misPartidosStream) {
+      if (type == 'hoy') {
+        yield misPartidos
+            .where((partido) =>
+                partido.fecha.day == now.day &&
+                partido.fecha.month == now.month &&
+                partido.fecha.year == now.year)
+            .toList();
+      } else if (type == 'ayer') {
+        final yesterday = now.subtract(Duration(days: 1));
+        yield misPartidos
+            .where((partido) =>
+                partido.fecha.day == yesterday.day &&
+                partido.fecha.month == yesterday.month &&
+                partido.fecha.year == yesterday.year)
+            .toList();
+      } else if (type == 'mañana') {
+        final tomorrow = now.add(Duration(days: 1));
+        yield misPartidos
+            .where((partido) =>
+                partido.fecha.day == tomorrow.day &&
+                partido.fecha.month == tomorrow.month &&
+                partido.fecha.year == tomorrow.year)
+            .toList();
+      } else {
+        // Emitir una lista vacía si el tipo no es reconocido
+        yield [];
+      }
     }
-    return [];
   }
 
   String getFormattedDate(DateTime date) {
@@ -156,24 +164,62 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Color(0xffd9d9d9),
           ),
           child: Center(
-            child: Text(
-              getFormattedDate(getSelectedDate()),
-              style: TextStyle(
-                fontFamily: 'Urbanist',
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: Color(0xff000000),
-              ),
+            child: StreamBuilder<List<Partido>>(
+              stream:
+                  getPartidosFiltrados(days[_selectedIndexDay].toLowerCase()),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(
+                    getFormattedDate(getSelectedDate()),
+                    style: TextStyle(
+                      fontFamily: 'Urbanist',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff000000),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text(
+                    'Error cargando partidos',
+                    style: TextStyle(
+                      fontFamily: 'Urbanist',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff000000),
+                    ),
+                  );
+                } else {
+                  return CircularProgressIndicator(); // o cualquier indicador de carga que desees mostrar
+                }
+              },
             ),
           ),
         ),
-        Column(
-          children: [
-            for (var partido
-                in getPartidosFiltrados(days[_selectedIndexDay].toLowerCase())
-                  ..sort((a, b) => a.fecha.compareTo(b.fecha)))
-              PartidoInfo(partido: partido),
-          ].reversed.toList(),
+        StreamBuilder<List<Partido>>(
+          stream: getPartidosFiltrados(days[_selectedIndexDay].toLowerCase()),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final partidos = snapshot.data!;
+              partidos.sort((a, b) => a.fecha.compareTo(b.fecha));
+              return Column(
+                children: partidos
+                    .map((partido) => PartidoInfo(partido: partido))
+                    .toList(),
+              );
+            } else if (snapshot.hasError) {
+              return Text(
+                'Error cargando partidos',
+                style: TextStyle(
+                  fontFamily: 'Urbanist',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xff000000),
+                ),
+              );
+            } else {
+              return CircularProgressIndicator(); // o cualquier indicador de carga que desees mostrar
+            }
+          },
         ),
       ],
     );

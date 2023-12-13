@@ -28,6 +28,17 @@ class Jugador {
     return encontrado;
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'nombre': nombre,
+      'equipoID': equipoID,
+      'numCamiseta': numCamiseta,
+      'imagenURL': imagenURL,
+      'estadisticas': estadisticas.toMap(),
+    };
+  }
+
   factory Jugador.fromMap(Map<String, dynamic> map) {
     return Jugador(
       id: map['id'],

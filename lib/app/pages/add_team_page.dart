@@ -13,6 +13,7 @@ class AnadirEquipo extends StatefulWidget {
 
 class _AnadirEquipoState extends State<AnadirEquipo> {
   final TextEditingController _nombreController = TextEditingController();
+  final TextEditingController _urlController = TextEditingController();
 
   // Agrega controladores para otros campos según sea necesario
 

@@ -2,15 +2,43 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
+import 'package:kdksdkskdxd/entities/partido.dart';
 
 class EquiposService {
   final CollectionReference equiposCollection =
       FirebaseFirestore.instance.collection('equipos');
+  final CollectionReference partidosCollection =
+      FirebaseFirestore.instance.collection('partidos');
 
   Stream<List<Equipo>> obtenerEquipos() {
     return equiposCollection.snapshots().map((querySnapshot) {
       return querySnapshot.docs.map((doc) => convertirEquipo(doc)).toList();
     });
+  }
+
+  Stream<List<Partido>> obtenerPartidos() {
+    return partidosCollection.snapshots().map((querySnapshot) {
+      return querySnapshot.docs.map((doc) => _convertirPartido(doc)).toList();
+    });
+  }
+
+  Partido _convertirPartido(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return Partido(
+      id: snapshot.id,
+      local: Equipo.fromMap(data['local']),
+      visita: Equipo.fromMap(data['visita']),
+      cancha: data['cancha'],
+      fecha: (data['fecha'] as Timestamp).toDate(),
+      live: data['live'],
+      finalizado: data['finalizado'],
+      golesLocal: data['golesLocal'],
+      golesVisita: data['golesVisita'],
+    );
+  }
+
+  Future<void> agregarPartido(Partido partido) {
+    return partidosCollection.add(partido.toMap());
   }
 
   Equipo convertirEquipo(DocumentSnapshot snapshot) {

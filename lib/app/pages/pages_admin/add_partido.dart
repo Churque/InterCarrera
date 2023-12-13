@@ -186,7 +186,7 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
         );
 
         Partido nuevoPartido = Partido(
-          id: 0,
+          id: '0',
           local: selectedEquipoLocal!,
           visita: selectedEquipoVisita!,
           cancha: cancha,
@@ -197,7 +197,8 @@ class _MyAddPartidoPage extends State<MyAddPartidoPage> {
           golesVisita: 0,
         );
 
-        misPartidos.add(nuevoPartido);
+        
+        equiposService.agregarPartido(nuevoPartido);
         Navigator.pop(context);
       },
       child: Container(
