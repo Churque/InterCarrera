@@ -29,6 +29,9 @@ class Jugador {
     }
     return encontrado;
   }
+
+    return Jugador(
+      id: map['id'],
 }
 
 List<Jugador> obtenerTopGoleadores(List<Jugador> jugadores, int cantidad) {

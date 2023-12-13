@@ -3,7 +3,7 @@ import 'package:kdksdkskdxd/entities/jugador.dart';
 import 'package:kdksdkskdxd/entities/jugador_estadisticas.dart';
 
 class Equipo implements Comparable<Equipo> {
-  final int id;
+  int id;
   int posicion;
   final String nombreEquipo;
   final String imagenURL;
