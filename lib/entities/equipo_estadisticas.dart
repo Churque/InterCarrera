@@ -28,6 +28,17 @@ class EquipoEstadisticas {
     print(toList());
   }
 
+  factory EquipoEstadisticas.fromMap(Map<String, dynamic> map) {
+    return EquipoEstadisticas(
+      pts: map['pts'],
+      pj: map['pj'],
+      pg: map['pg'],
+      pe: map['pe'],
+      pp: map['pp'],
+      difGoles: map['difGoles'],
+    );
+  }
+
   List<Object> toList() {
     return [pts, pj, pg, pe, pp, difGoles];
   }

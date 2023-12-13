@@ -18,4 +18,11 @@ class JugadorEstadisticas {
     this.asistencias += asistencias;
     print("Nuevas estadísticas: asistencias=${this.asistencias}");
   }
+
+  factory JugadorEstadisticas.fromMap(Map<String, dynamic> map) {
+    return JugadorEstadisticas(
+      goles: map['goles'],
+      asistencias: map['asistencias'],
+    );
+  }
 }
