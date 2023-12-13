@@ -32,6 +32,12 @@ class Partido {
       golesVisita = (golesVisita + goles).clamp(0, double.infinity).toInt();
     }
   }
+
+  @override
+  String toString() {
+    return 'Partido(id: $id, local: ${local.nombreEquipo}, visita: ${visita.nombreEquipo}, cancha: $cancha, fecha: $fecha, '
+        'live: $live, finalizado: $finalizado, golesLocal: $golesLocal, golesVisita: $golesVisita)';
+  }
 }
 
 List<Partido> misPartidos = [

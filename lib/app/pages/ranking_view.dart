@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/appstate.dart';
-import 'package:kdksdkskdxd/app/widgets/partido_model.dart';
-import 'package:kdksdkskdxd/entities/jugador.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
 
 import 'package:provider/provider.dart';
