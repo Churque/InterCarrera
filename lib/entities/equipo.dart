@@ -57,6 +57,10 @@ class Equipo implements Comparable<Equipo> {
       ),
     );
   }
+
+  void agregarJugador(Jugador jugador) {
+    jugadores.add(jugador);
+  }
 }
 
 List<Equipo> misEquipos = [

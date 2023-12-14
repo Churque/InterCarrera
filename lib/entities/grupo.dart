@@ -19,15 +19,22 @@ class Grupo {
 
 Stream<List<Grupo>> obtenerGrupos() async* {
   try {
-    // Escuchamos cambios en la colección de equipos
     Stream<QuerySnapshot> equiposStream =
         FirebaseFirestore.instance.collection('equipos').snapshots();
 
     await for (QuerySnapshot querySnapshot in equiposStream) {
       List<Equipo> equipos = querySnapshot.docs
-          .map((doc) => equiposService.convertirEquipo(
-              doc)) // Accede a _convertirEquipo a través de equiposService
+          .map((doc) => equiposService.convertirEquipo(doc))
           .toList();
+
+      // Ordena los equipos por puntos y luego por diferencia de goles
+      equipos.sort((a, b) {
+        if (a.estadisticas.pts != b.estadisticas.pts) {
+          return b.estadisticas.pts - a.estadisticas.pts;
+        } else {
+          return b.estadisticas.difGoles.compareTo(a.estadisticas.difGoles);
+        }
+      });
 
       int equiposPorGrupo = 4;
       int totalEquipos = equipos.length;
@@ -44,13 +51,9 @@ Stream<List<Grupo>> obtenerGrupos() async* {
         ));
       }
 
-      // Emitimos la lista de grupos cada vez que hay un cambio en la colección
       yield tusGrupos;
     }
   } catch (e) {
-    // Maneja los errores según sea necesario
     print('Error al obtener grupos: $e');
-    // No uses "throw e" aquí, ya que no puedes lanzar excepciones en un Stream.
-    // Si quieres notificar del error, puedes emitir un evento especial o imprimir un mensaje.
   }
 }

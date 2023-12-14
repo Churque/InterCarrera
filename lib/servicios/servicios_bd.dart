@@ -22,6 +22,19 @@ class EquiposService {
     });
   }
 
+  Stream<List<Jugador>> obtenerTodosLosJugadores() {
+    return equiposCollection.snapshots().map((querySnapshot) {
+      List<Jugador> jugadores = [];
+
+      for (var equipoDoc in querySnapshot.docs) {
+        var equipo = convertirEquipo(equipoDoc);
+        jugadores.addAll(equipo.jugadores);
+      }
+
+      return jugadores;
+    });
+  }
+
   Partido _convertirPartido(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return Partido(

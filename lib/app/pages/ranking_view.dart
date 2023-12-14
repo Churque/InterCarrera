@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kdksdkskdxd/app/appstate.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
+import 'package:kdksdkskdxd/servicios/servicios_bd.dart'; // Asegúrate de importar el servicio
 
 import 'package:provider/provider.dart';
 
 class MyRankingPage extends StatefulWidget {
-  //const MyRankingPage();
   const MyRankingPage({Key? key}) : super(key: key);
 
   @override
@@ -13,6 +13,8 @@ class MyRankingPage extends StatefulWidget {
 }
 
 class _MyRankingState extends State<MyRankingPage> {
+  final EquiposService equiposService = EquiposService(); // Crea una instancia
+
   List<Jugador> topGoleadores = [];
   List<Jugador> topAsistidores = [];
   List<Jugador> topGoleadoresYAsistidores = [];
@@ -20,18 +22,21 @@ class _MyRankingState extends State<MyRankingPage> {
   @override
   void initState() {
     super.initState();
+
+    // Ejemplo de cómo podrías llamar a las funciones de obtener top jugadores
+    // Dependiendo de tus necesidades, es posible que necesites ajustar esto
+    equiposService.obtenerTodosLosJugadores().listen((jugadores) {
+      setState(() {
+        topGoleadores = obtenerTopGoleadores(jugadores, 3);
+        topAsistidores = obtenerTopAsistidores(jugadores, 3);
+        topGoleadoresYAsistidores =
+            obtenerTopGoleadoresYAsistidores(jugadores, 3);
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    topGoleadores = obtenerTopGoleadores(misJugadores, 3);
-    topAsistidores = obtenerTopAsistidores(misJugadores, 3);
-    topGoleadoresYAsistidores =
-        obtenerTopGoleadoresYAsistidores(misJugadores, 3);
-
-    final appState = Provider.of<AppState>(context);
-    final jugadores = appState.jugadores;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -39,20 +44,24 @@ class _MyRankingState extends State<MyRankingPage> {
             GrupoInfoWidget(tipoRank: 'Goleadores'),
             for (var jugador in topGoleadores)
               JugadorInfoWidget(
-                  jugador: jugador, puntuacion: jugador.estadisticas.goles),
+                jugador: jugador,
+                puntuacion: jugador.estadisticas.goles,
+              ),
             buildBotonVerTodos(),
             GrupoInfoWidget(tipoRank: 'Asistencias'),
             for (var jugador in topAsistidores)
               JugadorInfoWidget(
-                  jugador: jugador,
-                  puntuacion: jugador.estadisticas.asistencias),
+                jugador: jugador,
+                puntuacion: jugador.estadisticas.asistencias,
+              ),
             buildBotonVerTodos(),
             GrupoInfoWidget(tipoRank: 'Goleadores + Asistencias'),
             for (var jugador in topGoleadoresYAsistidores)
               JugadorInfoWidget(
-                  jugador: jugador,
-                  puntuacion: (jugador.estadisticas.goles +
-                      jugador.estadisticas.asistencias)),
+                jugador: jugador,
+                puntuacion: (jugador.estadisticas.goles +
+                    jugador.estadisticas.asistencias),
+              ),
             buildBotonVerTodos(),
           ],
         ),
@@ -90,8 +99,6 @@ class JugadorInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
-
     return Container(
       height: 65,
       decoration: BoxDecoration(
@@ -134,7 +141,7 @@ class JugadorInfoWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    jugador.equipo?.nombreEquipo ?? 'Equipo no encontrado',
+                    '',
                     style: TextStyle(
                       fontFamily: 'Urbanist',
                       fontSize: 8,
