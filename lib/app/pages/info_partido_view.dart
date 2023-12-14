@@ -38,31 +38,37 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
   List<ResultadoPartido> generarHistorial(Equipo equipo) {
     List<Partido> ultimosPartidos = misPartidos
         .where((partido) =>
-            partido.local.id == equipo.id || partido.visita.id == equipo.id)
-        .take(3)
+            partido.finalizado &&
+            (partido.local.id == equipo.id || partido.visita.id == equipo.id))
         .toList();
 
-    ultimosPartidos.sort((a, b) => b.fecha.compareTo(a.fecha));
+    ultimosPartidos.sort((a, b) => a.fecha.compareTo(b.fecha));
 
-    return ultimosPartidos.map((partido) {
+    List<ResultadoPartido> historial = [];
+
+    for (var partido in ultimosPartidos) {
+      bool empate = partido.golesLocal == partido.golesVisita;
+      bool ganoLocal = partido.golesLocal > partido.golesVisita;
+
       bool gano = false;
-      bool empate = false;
 
-      if (partido.golesLocal == partido.golesVisita) {
-        empate = true;
-      } else if (partido.local.id == equipo.id) {
-        gano = partido.golesLocal > partido.golesVisita;
+      if (partido.local.id == equipo.id) {
+        gano = ganoLocal;
       } else if (partido.visita.id == equipo.id) {
-        gano = partido.golesVisita > partido.golesLocal;
+        gano = !ganoLocal && !empate;
       }
 
-      return ResultadoPartido(
-        gano: gano,
-        empate: empate,
-        golesEquipoLocal: partido.golesLocal,
-        golesEquipoVisita: partido.golesVisita,
+      historial.add(
+        ResultadoPartido(
+          gano: gano,
+          empate: empate,
+          golesEquipoLocal: partido.golesLocal,
+          golesEquipoVisita: partido.golesVisita,
+        ),
       );
-    }).toList();
+    }
+
+    return historial;
   }
 
   @override
@@ -343,19 +349,24 @@ class _MyInfoPartidoPage extends State<MyInfoPartidoPage> {
                       final resultado = historial.resultados[index];
                       return Positioned(
                         left: 16 * index.toDouble(),
-                        top: 0,
                         child: Container(
                           width: 21,
                           height: 21,
                           decoration: BoxDecoration(
                             color: resultado.gano
                                 ? Color(0xff00d92f)
-                                : Color(0xffff0000),
+                                : resultado.empate
+                                    ? Colors.grey
+                                    : Color(0xffff0000),
                             borderRadius: BorderRadius.circular(10.5),
                           ),
                           child: Center(
                             child: Text(
-                              resultado.gano ? 'G' : 'P',
+                              resultado.gano
+                                  ? 'G'
+                                  : resultado.empate
+                                      ? 'E'
+                                      : 'P',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: 'Urbanist',
