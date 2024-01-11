@@ -25,7 +25,7 @@ class EquipoInfoWidget extends StatelessWidget {
                       right: 11,
                     ),
                     child: Text(
-                      equipo.posicion.toString(),
+                      '',
                       style: TextStyle(
                         fontFamily: 'Urbanist',
                         fontSize: 16,

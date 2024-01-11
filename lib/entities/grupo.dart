@@ -46,7 +46,7 @@ Stream<List<Grupo>> obtenerGrupos() async* {
         int endIndex = (i + 1) * equiposPorGrupo;
         tusGrupos.add(Grupo(
           nombre: 'GRUPO ${String.fromCharCode(65 + i)}',
-          id: i + 1,
+          id: i + 1, // Esto es un int, no necesitas convertirlo a String
           equipos: equipos.sublist(startIndex, endIndex.clamp(0, totalEquipos)),
         ));
       }

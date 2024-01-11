@@ -2,7 +2,7 @@ import 'package:kdksdkskdxd/entities/equipo_estadisticas.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class Equipo implements Comparable<Equipo> {
-  int id;
+  String id;
   int posicion;
   String nombreEquipo;
   String imagenURL;
@@ -65,7 +65,7 @@ class Equipo implements Comparable<Equipo> {
 
 List<Equipo> misEquipos = [
   Equipo(
-    id: 1,
+    id: '1',
     posicion: 1,
     nombreEquipo: 'FC Barcelona1',
     imagenURL:
@@ -76,7 +76,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 2,
+    id: '2',
     posicion: 1,
     nombreEquipo: 'FC Barcelona2',
     imagenURL:
@@ -87,7 +87,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 3,
+    id: '3',
     posicion: 1,
     nombreEquipo: 'FC Barcelona3',
     imagenURL:
@@ -98,7 +98,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 4,
+    id: '4',
     posicion: 1,
     nombreEquipo: 'FC Barcelona4',
     imagenURL:
@@ -109,7 +109,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 5,
+    id: '5',
     posicion: 1,
     nombreEquipo: 'FC Barcelona5',
     imagenURL:
@@ -119,7 +119,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 6,
+    id: '6',
     posicion: 1,
     nombreEquipo: 'FC Barcelona6',
     imagenURL:
@@ -129,7 +129,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 7,
+    id: '7',
     posicion: 1,
     nombreEquipo: 'FC Barcelona7',
     imagenURL:
@@ -139,7 +139,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 8,
+    id: '8',
     posicion: 1,
     nombreEquipo: 'FC Barcelona8',
     imagenURL:
@@ -149,7 +149,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 9,
+    id: '9',
     posicion: 1,
     nombreEquipo: 'FC Barcelona9',
     imagenURL:
@@ -159,7 +159,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 10,
+    id: '10',
     posicion: 1,
     nombreEquipo: 'FC Barcelona10',
     imagenURL:
@@ -169,7 +169,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 11,
+    id: '11',
     posicion: 1,
     nombreEquipo: 'FC Barcelona11',
     imagenURL:
@@ -179,7 +179,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 12,
+    id: '12',
     posicion: 1,
     nombreEquipo: 'FC Barcelona12',
     imagenURL:
@@ -189,7 +189,7 @@ List<Equipo> misEquipos = [
     jugadores: [],
   ),
   Equipo(
-    id: 13,
+    id: '13',
     posicion: 1,
     nombreEquipo: 'FC Barcelona13',
     imagenURL:

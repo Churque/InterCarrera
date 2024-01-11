@@ -7,8 +7,39 @@ import 'package:kdksdkskdxd/entities/partido.dart';
 class EquiposService {
   final CollectionReference equiposCollection =
       FirebaseFirestore.instance.collection('equipos');
+
   final CollectionReference partidosCollection =
       FirebaseFirestore.instance.collection('partidos');
+
+  Future<Partido?> obtenerPartidoPorId(String partidoId) async {
+    DocumentSnapshot snapshot = await partidosCollection.doc(partidoId).get();
+    return snapshot.exists ? _convertirPartido(snapshot) : null;
+  }
+
+  // Método para actualizar un partido por su ID
+  Future<void> actualizarPartido(
+      String partidoId, Map<String, dynamic> datosActualizados) {
+    return partidosCollection.doc(partidoId).update(datosActualizados);
+  }
+
+  // Método para obtener un jugador por su ID
+
+  // Método para obtener un equipo por su ID
+  Future<Equipo?> obtenerEquipoPorId(String equipoId) async {
+    DocumentSnapshot snapshot = await equiposCollection.doc(equipoId).get();
+    return snapshot.exists ? convertirEquipo(snapshot) : null;
+  }
+
+  // Método para actualizar un equipo por su ID
+  Future<void> actualizarEquipo(
+      String equipoId, Map<String, dynamic> datosActualizados) async {
+    try {
+      await equiposCollection.doc(equipoId).update(datosActualizados);
+    } catch (e) {
+      // Si ocurre un error durante la actualización, lanza una excepción Future<void>.
+      return Future.error('Error al actualizar el equipo: $e');
+    }
+  }
 
   Stream<List<Equipo>> obtenerEquipos() {
     return equiposCollection.snapshots().map((querySnapshot) {
@@ -50,8 +81,12 @@ class EquiposService {
     );
   }
 
-  Future<void> agregarPartido(Partido partido) {
-    return partidosCollection.add(partido.toMap());
+  Future<void> agregarPartido(Partido partido) async {
+    DocumentReference partidoRef =
+        await partidosCollection.add(partido.toMap());
+
+    // Actualiza el atributo partidoId con el ID asignado por Firestore
+    await partidoRef.update({'partidoId': partidoRef.id});
   }
 
   Equipo convertirEquipo(DocumentSnapshot snapshot) {

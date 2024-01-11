@@ -3,7 +3,7 @@ import 'package:kdksdkskdxd/entities/jugador.dart';
 
 class PartidoModel extends ChangeNotifier {
   Map<String, int> itemCounts = {};
-  List<Jugador> jugadores = misJugadores;
+
   Map<String, int> golesCounts = {};
   Map<String, int> asistenciasCounts = {};
 
@@ -12,10 +12,10 @@ class PartidoModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void actualizarJugadores(List<Jugador> nuevosJugadores) {
-    jugadores = nuevosJugadores;
-    notifyListeners();
-  }
+  //void actualizarJugadores(List<Jugador> nuevosJugadores) {
+  // jugadores = nuevosJugadores;
+  // notifyListeners();
+  //}
 
   void updateGolesCount(String key, int value) {
     golesCounts[key] = value;

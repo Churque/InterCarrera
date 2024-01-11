@@ -141,7 +141,7 @@ class JugadorInfoWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '',
+                    'Equipo no encontrado',
                     style: TextStyle(
                       fontFamily: 'Urbanist',
                       fontSize: 8,

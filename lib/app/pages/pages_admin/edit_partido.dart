@@ -7,6 +7,9 @@ import 'package:kdksdkskdxd/entities/equipo.dart';
 import 'package:kdksdkskdxd/entities/jugador.dart';
 import 'package:kdksdkskdxd/entities/partido.dart';
 import 'package:provider/provider.dart';
+import 'package:kdksdkskdxd/servicios/servicios_bd.dart';
+
+final EquiposService db = EquiposService();
 
 class MyEditPartidoPage extends StatefulWidget {
   const MyEditPartidoPage({required this.partido});
@@ -132,7 +135,11 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
             goles: widget.partido.golesVisita,
             golesRecibidos: widget.partido.golesLocal,
           );
-
+          db.actualizarPartido(widget.partido.id, widget.partido.toMap());
+          db.actualizarEquipo(
+              widget.partido.local.id, widget.partido.local.toMap());
+          db.actualizarEquipo(
+              widget.partido.visita.id, widget.partido.visita.toMap());
           //actualizar estadísticas de jugadores de ekipo visita
           /*for (var jugador in widget.partido.visita.jugadores) {
             final key = _getKey(jugador);
@@ -143,11 +150,6 @@ class _MyEditPartidoPage extends State<MyEditPartidoPage> {
             );
           }
 */
-          Provider.of<AppState>(context, listen: false)
-              .updateEquipos(misEquipos);
-
-          Provider.of<AppState>(context, listen: false)
-              .updateJugadores(misJugadores);
 
           // Guardar cambios y salir
           // saveCounters();

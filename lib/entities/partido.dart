@@ -25,7 +25,7 @@ class Partido {
     required this.golesVisita,
   });
 
-  void actualizarGolesEquipo(int equipoID, int goles) {
+  void actualizarGolesEquipo(String equipoID, int goles) {
     if (equipoID == local.id) {
       golesLocal = (golesLocal + goles).clamp(0, double.infinity).toInt();
     } else if (equipoID == visita.id) {
